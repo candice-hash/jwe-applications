@@ -186,6 +186,48 @@
   }
   .hero-ctas{display:flex; flex-wrap:wrap; gap:14px;}
 
+  .hero .wrap{max-width:1080px;}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+    gap:44px;
+    align-items:center;
+  }
+  .hero-photo{
+    position:relative;
+    aspect-ratio:4/5;
+    border:1px solid #4A331C;
+    border-radius:2px;
+    overflow:hidden;
+    background:#1D150F;
+  }
+  .hero-photo img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .hero-photo-fallback{
+    display:none;
+    position:absolute; inset:0;
+    align-items:center; justify-content:center;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#8A7D63;
+    text-align:center;
+    padding:20px;
+    background:
+      repeating-linear-gradient(135deg, #2A2018, #2A2018 10px, #241C15 10px, #241C15 20px);
+  }
+  .hero-photo.no-photo img{display:none;}
+  .hero-photo.no-photo .hero-photo-fallback{display:flex;}
+
+  @media (max-width:820px){
+    .hero-grid{grid-template-columns:1fr; gap:28px;}
+    .hero-photo{aspect-ratio:16/9; order:-1;}
+  }
+
   .btn{
     display:inline-block;
     font-family:var(--font-mono);
@@ -347,8 +389,8 @@
   .required{color:var(--clay);}
 
   .form-msg{display:none; margin-top:16px; padding:14px 16px; font-size:0.9rem;}
-  .form-msg.success{display:block; background:#E7EEDF; border:1px solid #B9CBA8; color:var(--success);}
-  .form-msg.error{display:block; background:#F4DCD0; border:1px solid #E0AF97; color:#9B3A1B;}
+  .form-msg.msg-success{background:#E7EEDF; border:1px solid #B9CBA8; color:var(--success);}
+  .form-msg.msg-error{background:#F4DCD0; border:1px solid #E0AF97; color:#9B3A1B;}
 
   /* ---------- contract text ---------- */
   .contract-text{
@@ -402,8 +444,7 @@
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#volunteer-application">Volunteer</a></li>
-      <li><a href="#foster-application">Foster</a></li>
-      <li><a href="#adoption-application">Adopt</a></li>
+      <li><a href="#foster-adoption-application">Foster/Adopt</a></li>
       <li><a href="#contracts">Contracts</a></li>
     </ul>
   </nav>
@@ -414,14 +455,19 @@
 <main id="top">
 
   <section class="hero">
-    <div class="wrap">
-      <div class="eyebrow">Liberty's Legacy Inc. · Journey With Equus</div>
-      <h1>Every application.<br><em>One place.</em></h1>
-      <p class="lede">Volunteer, foster, and adoption applications — plus contract intake — all in one spot. Fill it out, it comes straight to Candice.</p>
-      <div class="hero-ctas">
-        <a href="#volunteer-application" class="btn btn-primary">Apply to Volunteer</a>
-        <a href="#foster-application" class="btn btn-ghost">Apply to Foster</a>
-        <a href="#adoption-application" class="btn btn-ghost">Apply to Adopt</a>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Liberty's Legacy Inc. · Journey With Equus</div>
+        <h1>Every application.<br><em>One place.</em></h1>
+        <p class="lede">Volunteer, foster, and adoption applications — plus contract intake — all in one spot. Fill it out, it comes straight to our team at Journey With Equus.</p>
+        <div class="hero-ctas">
+          <a href="#volunteer-application" class="btn btn-primary">Apply to Volunteer</a>
+          <a href="#foster-adoption-application" class="btn btn-ghost">Apply to Foster or Adopt</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="hero-photo.jpg" alt="Candice with a horse at Journey With Equus" onerror="this.closest('.hero-photo').classList.add('no-photo')">
+        <div class="hero-photo-fallback">Photo coming soon</div>
       </div>
     </div>
   </section>
@@ -444,13 +490,13 @@
           <div class="tag">Temporary · horse stays sanctuary-owned</div>
           <h3>Foster</h3>
           <p>You provide the property and daily care. The horse stays sanctuary-owned the whole time.</p>
-          <a href="#foster-application" class="btn btn-clay">Foster Application</a>
+          <a href="#foster-adoption-application" class="btn btn-clay">Foster/Adoption Application</a>
         </div>
         <div class="path-card adopt">
           <div class="tag">Permanent · ownership transfers</div>
           <h3>Adopt</h3>
           <p>A lifetime commitment. If life changes, the horse comes back to us — never to an auction.</p>
-          <a href="#adoption-application" class="btn" style="background:var(--hay); color:#241A13; font-weight:600;">Adoption Application</a>
+          <a href="#foster-adoption-application" class="btn" style="background:var(--hay); color:#241A13; font-weight:600;">Foster/Adoption Application</a>
         </div>
       </div>
     </div>
@@ -461,7 +507,7 @@
       <div class="section-head">
         <div class="eyebrow">Applications &amp; Contracts</div>
         <h2>Open a gate, fill it out.</h2>
-        <p>Every form here goes straight to Candice, with a confirmation the moment it's in.</p>
+        <p>Every form here goes straight to our team at Journey With Equus, with a confirmation the moment it's in.</p>
       </div>
 
       <!-- ============================= VOLUNTEER APPLICATION ============================= -->
@@ -557,185 +603,158 @@
               </div>
 
               <button type="submit" class="btn btn-sage">Submit Volunteer Application</button>
-              <div class="form-msg success" data-success>Thank you — your volunteer application is in. Candice will reach out to schedule your first shift.</div>
-              <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
+              <div class="form-msg msg-success" data-success>Thank you — your volunteer application is in. Our team will reach out to schedule your first shift.</div>
+              <div class="form-msg msg-error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
             </form>
           </div>
         </div>
       </div>
 
       <!-- ============================= FOSTER APPLICATION ============================= -->
-      <div class="gate" id="foster-application" data-open="false">
+      <!-- ============================= FOSTER/ADOPTION APPLICATION (combined, matches JotForm) ============================= -->
+      <div class="gate" id="foster-adoption-application" data-open="false">
         <button class="gate-head" data-gate-toggle aria-expanded="false">
           <span class="gate-title-wrap">
             <span class="gate-icon" aria-hidden="true">🌾</span>
             <span>
-              <span class="gate-title">Foster Application</span>
-              <span class="gate-sub">Provide the property, we keep the ownership</span>
+              <span class="gate-title">Foster/Adoption Application</span>
+              <span class="gate-sub">One form covers both — tell us which below</span>
             </span>
           </span>
           <svg class="latch" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="gate-body">
           <div class="gate-inner">
-            <form name="foster-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
-              <input type="hidden" name="form-name" value="foster-application">
+            <p class="hint" style="margin-bottom:18px;">You MUST be 18 years or older to submit this application, and you MUST provide three non-related references.</p>
+
+            <form name="foster-adoption-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
+              <input type="hidden" name="form-name" value="foster-adoption-application">
               <p class="sr-only"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
 
               <fieldset>
+                <legend>Basics</legend>
+                <div class="field-row">
+                  <div class="field"><label for="faa-date">Date <span class="required">*</span></label><input type="date" id="faa-date" name="Date" required></div>
+                  <div class="field">
+                    <label>Are you applying to foster or adopt? <span class="required">*</span></label>
+                    <div class="radio-row">
+                      <label class="radio-item"><input type="radio" name="Foster or Adopt" value="Foster" required> Foster</label>
+                      <label class="radio-item"><input type="radio" name="Foster or Adopt" value="Adopt"> Adopt</label>
+                      <label class="radio-item"><input type="radio" name="Foster or Adopt" value="Not sure yet"> Not sure yet</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="field"><label for="faa-horse">Name of the horse you are interested in adopting/fostering? <span class="required">*</span></label><input type="text" id="faa-horse" name="Horse Name" required></div>
+              </fieldset>
+
+              <fieldset>
                 <legend>Your Info</legend>
+                <div class="field"><label for="faa-name">Full Name <span class="required">*</span></label><input type="text" id="faa-name" name="Full Name" required></div>
                 <div class="field-row">
-                  <div class="field"><label for="f-name">Full name <span class="required">*</span></label><input type="text" id="f-name" name="Full Name" required></div>
-                  <div class="field"><label for="f-phone">Phone <span class="required">*</span></label><input type="tel" id="f-phone" name="Phone" required></div>
+                  <div class="field"><label for="faa-email">Email <span class="required">*</span></label><input type="email" id="faa-email" name="Email" required></div>
+                  <div class="field"><label for="faa-phone">Phone Number <span class="required">*</span></label><input type="tel" id="faa-phone" name="Phone Number" required></div>
                 </div>
-                <div class="field-row">
-                  <div class="field"><label for="f-email">Email <span class="required">*</span></label><input type="email" id="f-email" name="Email" required></div>
-                  <div class="field"><label for="f-address">Property address <span class="required">*</span></label><input type="text" id="f-address" name="Property Address" required></div>
+                <div class="field"><label for="faa-address">Your Full Address <span class="required">*</span></label><input type="text" id="faa-address" name="Full Address" required></div>
+                <div class="field">
+                  <label class="check-item"><input type="checkbox" id="faa-18" name="18 or Older" value="Yes" required> I confirm I am 18 years of age or older. <span class="required">*</span></label>
                 </div>
               </fieldset>
 
               <fieldset>
-                <legend>The Property</legend>
-                <div class="field-row">
-                  <div class="field"><label for="f-own">Do you own or rent this property? <span class="required">*</span></label>
-                    <select id="f-own" name="Own or Rent" required>
-                      <option value="">Select one</option>
-                      <option>Own</option>
-                      <option>Rent (landlord has approved horses)</option>
-                    </select>
-                  </div>
-                  <div class="field"><label for="f-acres">Acreage available for the horse(s) <span class="required">*</span></label><input type="text" id="f-acres" name="Acreage" required></div>
-                </div>
-                <div class="field-row">
-                  <div class="field"><label for="f-fence">Fencing type &amp; condition <span class="required">*</span></label><input type="text" id="f-fence" name="Fencing" placeholder="e.g. 4-rail pipe, good condition" required></div>
-                  <div class="field"><label for="f-shelter">Shelter / run-in available? <span class="required">*</span></label>
-                    <select id="f-shelter" name="Shelter Available" required>
-                      <option value="">Select one</option>
-                      <option>Yes, dedicated run-in shelter</option>
-                      <option>Yes, barn stall</option>
-                      <option>No shelter currently</option>
-                    </select>
+                <legend>Property</legend>
+                <div class="field">
+                  <label>Do you own/rent your own facility, OR do you plan to board the horse? <span class="required">*</span></label>
+                  <p class="hint" style="margin:2px 0 10px;">Journey With Equus generally prefers homes on the applicant's own property, with pasture or a large paddock and a companion horse — not a box stall. If you plan to board, tell us more below so we can evaluate the fit.</p>
+                  <div class="radio-row">
+                    <label class="radio-item"><input type="radio" id="faa-own" name="Own, Rent, or Board" value="Own" required> Own</label>
+                    <label class="radio-item"><input type="radio" id="faa-rent" name="Own, Rent, or Board" value="Rent"> Rent</label>
+                    <label class="radio-item"><input type="radio" id="faa-board" name="Own, Rent, or Board" value="Board"> Board</label>
                   </div>
                 </div>
-                <div class="field"><label for="f-current-horses">Number of horses currently on the property</label><input type="text" id="f-current-horses" name="Current Horses on Property"></div>
-              </fieldset>
-
-              <fieldset>
-                <legend>Care Team</legend>
-                <div class="field-row">
-                  <div class="field"><label for="f-vet">Current veterinarian &amp; clinic</label><input type="text" id="f-vet" name="Veterinarian"></div>
-                  <div class="field"><label for="f-farrier">Current farrier</label><input type="text" id="f-farrier" name="Farrier"></div>
+                <div id="faa-board-details" style="display:none;">
+                  <div class="field"><label for="faa-facility-info">Boarding facility name, full address, and the name &amp; phone number of the person in charge <span class="required">*</span></label><textarea id="faa-facility-info" name="Boarding Facility Info"></textarea></div>
+                  <div class="field"><label for="faa-turnout">Describe the turnout at this facility — is it a large paddock or pasture with herd companionship, or a box stall? <span class="required">*</span></label><textarea id="faa-turnout" name="Boarding Turnout Description"></textarea></div>
                 </div>
+                <div class="field"><label for="faa-acres">How many acres does your farm have where the horse will be kept? What type of fencing? <span class="required">*</span></label><input type="text" id="faa-acres" name="Acreage and Fencing" required></div>
+                <div class="field"><label for="faa-family">Number of people in the family? Please list the number and ages of children (if any). <span class="required">*</span></label><textarea id="faa-family" name="Family and Children" required></textarea></div>
+                <div class="field"><label for="faa-other-horses">Do you have other horses? <span class="required">*</span></label><input type="text" id="faa-other-horses" name="Other Horses" required></div>
               </fieldset>
 
               <fieldset>
                 <legend>Experience</legend>
-                <div class="field"><label for="f-experience">Describe your experience with horses (years, types handled) <span class="required">*</span></label><textarea id="f-experience" name="Experience" required></textarea></div>
-                <div class="field"><label for="f-why">Why do you want to foster? <span class="required">*</span></label><textarea id="f-why" name="Why Foster" required></textarea></div>
+                <div class="field"><label for="faa-riding-level">Please describe your riding level of expertise. <span class="required">*</span></label><textarea id="faa-riding-level" name="Riding Level" required></textarea></div>
+                <div class="field"><label for="faa-abused-exp">Do you have experience working with abused/neglected horses? If so, please describe. <span class="required">*</span></label><textarea id="faa-abused-exp" name="Experience with Abused Horses" required></textarea></div>
+                <div class="field"><label for="faa-responsible">Who will be responsible for feeding/training/general care? <span class="required">*</span></label><input type="text" id="faa-responsible" name="Responsible for Care" required></div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Intended Use</legend>
                 <div class="field">
-                  <label>Can you cover routine feed and farrier costs during the foster period? <span class="required">*</span></label>
-                  <div class="radio-row">
-                    <label class="radio-item"><input type="radio" name="Can Cover Costs" value="Yes" required> Yes</label>
-                    <label class="radio-item"><input type="radio" name="Can Cover Costs" value="Need to discuss"> Need to discuss with the sanctuary</label>
-                  </div>
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <legend>References</legend>
-                <div class="field-row">
-                  <div class="field"><label for="f-ref1">Reference 1 — name, phone, relationship <span class="required">*</span></label><input type="text" id="f-ref1" name="Reference 1" required></div>
-                  <div class="field"><label for="f-ref2">Reference 2 — name, phone, relationship <span class="required">*</span></label><input type="text" id="f-ref2" name="Reference 2" required></div>
-                </div>
-              </fieldset>
-
-              <div class="agree-box">
-                <input type="checkbox" id="f-homevisit" name="Home Visit Consent" value="Yes" required>
-                <label for="f-homevisit">I consent to a home/property visit by a Journey With Equus representative before placement, and periodically during the foster period. <span class="required">*</span></label>
-              </div>
-
-              <button type="submit" class="btn btn-clay">Submit Foster Application</button>
-              <div class="form-msg success" data-success>Thank you — your foster application is in front of Candice now. She'll follow up to schedule a property visit.</div>
-              <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================= ADOPTION APPLICATION ============================= -->
-      <div class="gate" id="adoption-application" data-open="false">
-        <button class="gate-head" data-gate-toggle aria-expanded="false">
-          <span class="gate-title-wrap">
-            <span class="gate-icon" aria-hidden="true">🏡</span>
-            <span>
-              <span class="gate-title">Adoption Application</span>
-              <span class="gate-sub">A lifetime home, with us watching your back</span>
-            </span>
-          </span>
-          <svg class="latch" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="gate-body">
-          <div class="gate-inner">
-            <form name="adoption-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
-              <input type="hidden" name="form-name" value="adoption-application">
-              <p class="sr-only"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
-
-              <fieldset>
-                <legend>Your Info</legend>
-                <div class="field-row">
-                  <div class="field"><label for="a-name">Full name <span class="required">*</span></label><input type="text" id="a-name" name="Full Name" required></div>
-                  <div class="field"><label for="a-phone">Phone <span class="required">*</span></label><input type="tel" id="a-phone" name="Phone" required></div>
-                </div>
-                <div class="field-row">
-                  <div class="field"><label for="a-email">Email <span class="required">*</span></label><input type="email" id="a-email" name="Email" required></div>
-                  <div class="field"><label for="a-address">Property / boarding address <span class="required">*</span></label><input type="text" id="a-address" name="Property Address" required></div>
-                </div>
-              </fieldset>
-
-              <fieldset>
-                <legend>The Horse</legend>
-                <div class="field"><label for="a-horse">Is there a specific horse you're interested in? If not, that's okay — tell us what you're open to.</label><input type="text" id="a-horse" name="Horse of Interest"></div>
-                <div class="field">
-                  <label>Intended role for this horse <span class="required">*</span></label>
+                  <label>What is your intended use of the horse you are interested in if adopting? <span class="required">*</span></label>
                   <div class="check-row">
-                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Companion / pasture ornament"> Companion / pasture ornament</label>
-                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Light riding"> Light riding</label>
-                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Therapy / healing work"> Therapy / healing work</label>
-                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Other"> Other (explain below)</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Hunter/Jumper"> Hunter/Jumper</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Eventing"> Eventing</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Western Pleasure"> Western Pleasure</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="English Pleasure"> English Pleasure</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Dressage"> Dressage</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Trail Riding"> Trail Riding</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Pleasure Riding"> Pleasure Riding</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Companion/Pasture Pet"> Companion/Pasture Pet</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Competition - Rodeo, Cow Work, Gymkhana, Reining"> Competition — Rodeo, Cow Work, Gymkhana, Reining</label>
+                    <label class="check-item"><input type="checkbox" id="faa-use-other" name="Intended Use" value="Other"> Other</label>
                   </div>
                 </div>
-              </fieldset>
-
-              <fieldset>
-                <legend>Property &amp; Care</legend>
+                <div id="faa-other-explain-wrap" style="display:none;">
+                  <div class="field"><label for="faa-other-explain">If you answered "Other" above, please explain <span class="required">*</span></label><input type="text" id="faa-other-explain" name="Other Use Explanation"></div>
+                </div>
+                <div class="field"><label for="faa-who-rides">Who will ride the adopted horse? What is their age and riding level? <span class="required">*</span></label><textarea id="faa-who-rides" name="Who Will Ride" required></textarea></div>
+                <div class="field"><label for="faa-out-of-town">If you are the responsible party, who will take care of the horse while you are out of town? <span class="required">*</span></label><textarea id="faa-out-of-town" name="Care While Out of Town" required></textarea></div>
                 <div class="field-row">
-                  <div class="field"><label for="a-property-type">Own property, board, or lease? <span class="required">*</span></label>
-                    <select id="a-property-type" name="Property Type" required>
-                      <option value="">Select one</option>
-                      <option>Own property</option>
-                      <option>Board at a facility</option>
-                      <option>Lease land</option>
-                    </select>
-                  </div>
-                  <div class="field"><label for="a-vet">Veterinarian &amp; clinic (current or planned)</label><input type="text" id="a-vet" name="Veterinarian"></div>
+                  <div class="field"><label for="faa-how-long">How long do you intend on keeping the adopted/fostered horse? <span class="required">*</span></label><input type="text" id="faa-how-long" name="Intended Length of Keeping" required></div>
+                  <div class="field"><label for="faa-monthly-cost">How much do you anticipate you'll spend on the horse's care monthly? <span class="required">*</span></label><input type="text" id="faa-monthly-cost" name="Anticipated Monthly Cost" required></div>
                 </div>
-                <div class="field"><label for="a-experience">Describe your experience with horses <span class="required">*</span></label><textarea id="a-experience" name="Experience" required></textarea></div>
-                <div class="field"><label for="a-plan">If your life circumstances changed, what's your plan for this horse's long-term care? <span class="required">*</span></label><textarea id="a-plan" name="Long Term Plan" required></textarea></div>
               </fieldset>
 
               <fieldset>
-                <legend>References</legend>
-                <div class="field"><label for="a-ref">Veterinary or equine professional reference — name &amp; phone <span class="required">*</span></label><input type="text" id="a-ref" name="Reference" required></div>
+                <legend>Care Knowledge</legend>
+                <div class="field"><label for="faa-worming">How often does a horse need worming? Farrier care? Dental care? <span class="required">*</span></label><textarea id="faa-worming" name="Worming Farrier Dental Knowledge" required></textarea></div>
+                <div class="field"><label for="faa-vaccinations">What vaccinations do you give? <span class="required">*</span></label><textarea id="faa-vaccinations" name="Vaccinations Given" required></textarea></div>
+                <div class="field"><label for="faa-why">Please tell us why you want to adopt/foster a horse: <span class="required">*</span></label><textarea id="faa-why" name="Why Adopt or Foster" required></textarea></div>
+                <div class="field"><label for="faa-if-move">What would you do with the horse if you had to move? <span class="required">*</span></label><textarea id="faa-if-move" name="Plan If You Move" required></textarea></div>
+                <div class="field-row">
+                  <div class="field"><label for="faa-vet">What is the name and number of your veterinarian? <span class="required">*</span></label><input type="text" id="faa-vet" name="Veterinarian Name and Number" required></div>
+                  <div class="field"><label for="faa-farrier">What is the name and number of your farrier? <span class="required">*</span></label><input type="text" id="faa-farrier" name="Farrier Name and Number" required></div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Background</legend>
+                <div class="field"><label for="faa-citation">Have you ever been issued a warning/citation, or been convicted for a violation against animals? If so, please explain: <span class="required">*</span></label><textarea id="faa-citation" name="Animal Violation History" required></textarea></div>
+                <div class="field"><label for="faa-surrendered">Have you ever sold a horse to auction or surrendered an animal to a rescue/shelter/other? If so, please explain: <span class="required">*</span></label><textarea id="faa-surrendered" name="Prior Surrender or Auction History" required></textarea></div>
               </fieldset>
 
               <div class="agree-box">
-                <input type="checkbox" id="a-return" name="Return Policy Acknowledged" value="Yes" required>
-                <label for="a-return">I understand that if I can no longer keep this horse, it must be returned to Journey With Equus — it may never be sold, given away, or sent to auction. <span class="required">*</span></label>
+                <input type="checkbox" id="faa-bgcheck" name="Background Check Authorization" value="Yes" required>
+                <label for="faa-bgcheck">I authorize Journey With Equus to conduct a background check regarding any history of animal cruelty or abuse as part of this application. <span class="required">*</span></label>
               </div>
 
-              <button type="submit" class="btn" style="background:var(--hay); color:#241A13; font-weight:600;">Submit Adoption Application</button>
-              <div class="form-msg success" data-success>Thank you — your adoption application is in front of Candice now. She'll be in touch about next steps, including a property visit.</div>
-              <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
+              <fieldset>
+                <legend>References (Non-Related)</legend>
+                <div class="field"><label for="faa-ref1">Reference One — name and phone number <span class="required">*</span></label><input type="text" id="faa-ref1" name="Reference One" required></div>
+                <div class="field"><label for="faa-ref2">Reference Two — name and phone number <span class="required">*</span></label><input type="text" id="faa-ref2" name="Reference Two" required></div>
+                <div class="field"><label for="faa-ref3">Reference Three — name and phone number <span class="required">*</span></label><input type="text" id="faa-ref3" name="Reference Three" required></div>
+              </fieldset>
+
+              <div class="field"><label for="faa-anything-else">Is there anything else you want us to know? <span class="required">*</span></label><textarea id="faa-anything-else" name="Anything Else" required></textarea></div>
+
+              <div class="agree-box">
+                <label for="faa-certify" style="margin-bottom:8px; display:block;">Typing your name below certifies that all information provided is correct and true. <span class="required">*</span></label>
+                <input type="text" id="faa-certify" name="Certification Signature" required placeholder="Type your full name" style="max-width:340px;">
+              </div>
+
+              <button type="submit" class="btn btn-clay">Submit Application</button>
+              <div class="form-msg msg-success" data-success>Thank you — your application is in front of our team now. We'll follow up with next steps.</div>
+              <div class="form-msg msg-error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
             </form>
           </div>
         </div>
@@ -744,7 +763,7 @@
       <div class="section-head" id="contracts" style="margin-top:54px;">
         <div class="eyebrow">Once you're approved</div>
         <h2>Foster &amp; Adoption Contracts</h2>
-        <p>Approved fosters and adopters only. This isn't the contract itself — it's what Candice needs to send you the official one to sign.</p>
+        <p>Approved fosters and adopters only. This isn't the contract itself — it's what our team needs to send you the official one to sign.</p>
       </div>
 
       <!-- ============================= FOSTER CONTRACT (v2, final) ============================= -->
@@ -763,12 +782,12 @@
           <div class="gate-inner">
 
             <div class="pw-gate" data-pw-gate="foster">
-              <p class="hint" style="margin-bottom:10px;">Approved to foster? Enter the password Candice gave you.</p>
+              <p class="hint" style="margin-bottom:10px;">Approved to foster? Enter the password our team gave you.</p>
               <div class="field-row" style="align-items:end;">
                 <div class="field"><label for="fc-pw">Password</label><input type="password" id="fc-pw"></div>
                 <div class="field" style="display:flex; align-items:flex-end;"><button type="button" class="btn btn-clay" data-pw-submit="foster">Unlock</button></div>
               </div>
-              <div class="form-msg error" data-pw-error="foster">That's not quite right — check with Candice.</div>
+              <div class="form-msg msg-error" data-pw-error="foster">That's not quite right — check with our team at Journey With Equus.</div>
             </div>
 
             <div class="pw-content" data-pw-content="foster" style="display:none;">
@@ -930,9 +949,9 @@
                 </div>
 
                 <button type="submit" class="btn btn-clay">Submit Foster Agreement</button>
-                <p class="hint" style="margin-top:8px;">This goes to Candice for review. It's final once JWE's Authorized Representative countersigns.</p>
-                <div class="form-msg success" data-success>Received — this Foster Agreement is pending JWE's review and countersignature.</div>
-                <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
+                <p class="hint" style="margin-top:8px;">This goes to our team for review. It's final once JWE's Authorized Representative countersigns.</p>
+                <div class="form-msg msg-success" data-success>Received — this Foster Agreement is pending JWE's review and countersignature.</div>
+                <div class="form-msg msg-error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
               </form>
             </div>
 
@@ -956,12 +975,12 @@
           <div class="gate-inner">
 
             <div class="pw-gate" data-pw-gate="adopt">
-              <p class="hint" style="margin-bottom:10px;">Approved to adopt? Enter the password Candice gave you.</p>
+              <p class="hint" style="margin-bottom:10px;">Approved to adopt? Enter the password our team gave you.</p>
               <div class="field-row" style="align-items:end;">
                 <div class="field"><label for="ac-pw">Password</label><input type="password" id="ac-pw"></div>
                 <div class="field" style="display:flex; align-items:flex-end;"><button type="button" class="btn" style="background:var(--hay); color:#241A13; font-weight:600;" data-pw-submit="adopt">Unlock</button></div>
               </div>
-              <div class="form-msg error" data-pw-error="adopt">That's not quite right — check with Candice.</div>
+              <div class="form-msg msg-error" data-pw-error="adopt">That's not quite right — check with our team at Journey With Equus.</div>
             </div>
 
             <div class="pw-content" data-pw-content="adopt" style="display:none;">
@@ -1092,7 +1111,7 @@
                     </div>
                   </div>
                   <div class="field"><label for="ac-facility">Facility name &amp; address (if boarding)</label><input type="text" id="ac-facility" name="Boarding Facility Name and Address"></div>
-                  <p class="hint">The adoption deposit, adoption fee, fee track (Clause 3), and balance due date are completed by JWE on the final agreement, based on what Candice has already discussed with you.</p>
+                  <p class="hint">The adoption deposit, adoption fee, fee track (Clause 3), and balance due date are completed by JWE on the final agreement, based on what our team has already discussed with you.</p>
                 </fieldset>
 
                 <fieldset>
@@ -1117,9 +1136,9 @@
                 <div class="field"><label for="ac-cosig">Co-adopter signature (typed full legal name, if any)</label><input type="text" id="ac-cosig" name="Co-Adopter Digital Signature"></div>
 
                 <button type="submit" class="btn" style="background:var(--hay); color:#241A13; font-weight:600;">Submit Adoption Contract</button>
-                <p class="hint" style="margin-top:8px;">This goes to Candice for review. It's final once JWE's Authorized Representative countersigns.</p>
-                <div class="form-msg success" data-success>Received — this Adoption Contract is pending JWE's review and countersignature.</div>
-                <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
+                <p class="hint" style="margin-top:8px;">This goes to our team for review. It's final once JWE's Authorized Representative countersigns.</p>
+                <div class="form-msg msg-success" data-success>Received — this Adoption Contract is pending JWE's review and countersignature.</div>
+                <div class="form-msg msg-error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
               </form>
             </div>
 
@@ -1241,6 +1260,43 @@
   }
   wireSameAddressToggle('fc-same','fc-horse-address-wrap','fc-horse-address');
   wireSameAddressToggle('ac-same','ac-horse-address-wrap','ac-horse-address');
+
+  // "Board" toggle for the Foster/Adoption Application
+  (function(){
+    var boardRadio = document.getElementById('faa-board');
+    var wrap = document.getElementById('faa-board-details');
+    var facilityInput = document.getElementById('faa-facility-info');
+    var turnoutInput = document.getElementById('faa-turnout');
+    var radios = document.querySelectorAll('input[name="Own, Rent, or Board"]');
+    if(!boardRadio || !wrap) return;
+    function sync(){
+      var isBoard = boardRadio.checked;
+      wrap.style.display = isBoard ? 'block' : 'none';
+      if(isBoard){
+        facilityInput.setAttribute('required','required');
+        turnoutInput.setAttribute('required','required');
+      } else {
+        facilityInput.removeAttribute('required');
+        turnoutInput.removeAttribute('required');
+      }
+    }
+    radios.forEach(function(r){ r.addEventListener('change', sync); });
+    sync();
+  })();
+
+  // "Other" intended-use toggle for the Foster/Adoption Application
+  (function(){
+    var cb = document.getElementById('faa-use-other');
+    var wrap = document.getElementById('faa-other-explain-wrap');
+    var input = document.getElementById('faa-other-explain');
+    if(!cb || !wrap) return;
+    function sync(){
+      wrap.style.display = cb.checked ? 'block' : 'none';
+      if(cb.checked){ input.setAttribute('required','required'); } else { input.removeAttribute('required'); }
+    }
+    cb.addEventListener('change', sync);
+    sync();
+  })();
 
   // Netlify AJAX form submission
   function encodeFormData(data){
