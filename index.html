@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Involved — Journey With Equus</title>
+<meta name="description" content="Volunteer, foster, and adoption applications for Journey With Equus, a permanent equine sanctuary in Eastern Colorado. Foster and adoption contracts available online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- ========================================================================
+  DEPLOYMENT NOTES FOR CANDICE (remove this comment block once read)
+  1. This is a single static HTML file. Deploy it to your journeywithequus
+     domain on Netlify the same way you deployed Beyond the Barn Doors.
+  2. Every form below uses Netlify Forms (data-netlify="true"). Netlify
+     detects them automatically at build/deploy time because the raw
+     <form> tags are present in this HTML — no extra setup needed on
+     Netlify's end besides deploying the file as-is.
+  3. To get emailed every time someone submits: in your Netlify dashboard
+     go to Site configuration > Forms > Form notifications > Add
+     notification > Email notification, and add your inbox for each of
+     the 5 forms (or select "all forms"). That's what makes submissions
+     "come to you." Submissions also collect in Netlify's Forms dashboard
+     as a searchable, exportable backup — should solve the "hard to find
+     what I need" problem from Jotform/Google Forms.
+  4. The Foster Contract and Adoption Contract sections now contain your
+     actual finalized agreements (v2), transcribed in full, with matching
+     fields, required initials for the key clauses (no auction/slaughter,
+     no breeding, etc.), and a typed-name electronic signature — your
+     documents both explicitly authorize electronic signatures, so this
+     is real signing, not just intake. You still countersign as JWE's
+     Authorized Representative separately; nothing here does that
+     automatically.
+  5. Both contract sections are behind a simple password (search this
+     file for CONTRACT_PASSWORDS to change "fosterhorse" / "adopthorse"
+     to whatever you want). This is a soft gate, not real security —
+     good for keeping randoms out of a short intake form, not for
+     anything sensitive.
+========================================================================= -->
+
+<style>
+  :root{
+    --ink:#241A13;
+    --hero-bg:#241A13;
+    --charcoal:#2E2620;
+    --parchment:#F1E7D3;
+    --panel:#FBF6EC;
+    --sage:#6E7A5C;
+    --sage-dark:#525E44;
+    --clay:#B5602A;
+    --clay-dark:#8F4A20;
+    --hay:#D9A441;
+    --hay-light:#EFCB7E;
+    --cream:#F1E7D3;
+    --line:#D8C9AC;
+    --success:#4C6B3F;
+
+    --font-display:'Fraunces', Georgia, serif;
+    --font-body:'Work Sans', -apple-system, sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- wood rail divider (signature element) ---------- */
+  .rail{
+    height:14px;
+    background:
+      repeating-linear-gradient(90deg,
+        #7A5B37 0px, #7A5B37 2px,
+        #6B4E2E 2px, #6B4E2E 40px,
+        #7A5B37 40px, #7A5B37 42px,
+        #5F4529 42px, #5F4529 80px);
+    border-top:1px solid #4A331C;
+    border-bottom:1px solid #4A331C;
+  }
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(36,26,19,0.96);
+    backdrop-filter:blur(4px);
+    color:var(--cream);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    max-width:920px; margin:0 auto;
+  }
+  .brand{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.15rem;
+    letter-spacing:0.01em;
+    text-decoration:none;
+    color:var(--hay-light);
+  }
+  .brand small{
+    display:block;
+    font-family:var(--font-mono);
+    font-size:0.6rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#B7A88A;
+    font-weight:400;
+  }
+  .nav-links{display:flex; gap:22px; list-style:none; margin:0; padding:0;}
+  .nav-links a{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:#E4D7BB;
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--hay-light); border-color:var(--hay);}
+  .nav-toggle{display:none; background:none; border:1px solid #6B5A42; color:var(--cream); font-family:var(--font-mono); font-size:0.7rem; padding:6px 10px; letter-spacing:0.08em; text-transform:uppercase;}
+
+  @media (max-width:700px){
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0;
+      flex-direction:column; gap:0;
+      background:#1D150F; padding:8px 24px 18px;
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:10px 0; border-bottom:1px solid #3A2E22;}
+    .nav-toggle{display:inline-block;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(217,164,65,0.14), transparent 55%),
+      var(--hero-bg);
+    color:var(--cream);
+    padding:88px 0 76px;
+    text-align:left;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--hay);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(2.2rem, 5vw, 3.4rem);
+    line-height:1.08;
+    margin:0 0 22px;
+    max-width:15ch;
+  }
+  .hero h1 em{font-style:italic; font-weight:500; color:var(--hay-light);}
+  .hero p.lede{
+    font-size:1.1rem;
+    max-width:56ch;
+    color:#DCCFB4;
+    margin:0 0 34px;
+  }
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:14px;}
+
+  .btn{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:2px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform 0.12s ease, background 0.15s ease, border-color .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--hay); color:#241A13; font-weight:600;}
+  .btn-primary:hover{background:var(--hay-light);}
+  .btn-ghost{background:transparent; color:var(--cream); border-color:#6B5A42;}
+  .btn-ghost:hover{border-color:var(--hay);}
+  .btn-clay{background:var(--clay); color:#fff;}
+  .btn-clay:hover{background:var(--clay-dark);}
+  .btn-sage{background:var(--sage); color:#fff;}
+  .btn-sage:hover{background:var(--sage-dark);}
+  .btn:disabled{opacity:0.5; cursor:not-allowed; transform:none;}
+
+  /* ---------- choose your path ---------- */
+  .paths{padding:64px 0 20px;}
+  .section-head{margin-bottom:38px; max-width:60ch;}
+  .section-head .eyebrow{color:var(--clay);}
+  .section-head h2{
+    font-family:var(--font-display);
+    font-size:clamp(1.6rem,3.4vw,2.1rem);
+    font-weight:600;
+    margin:0 0 12px;
+  }
+  .section-head p{color:#5A4E3D; margin:0;}
+
+  .path-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:760px){.path-grid{grid-template-columns:1fr;}}
+
+  .path-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-top:4px solid var(--sage);
+    padding:26px 24px 24px;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .path-card.foster{border-top-color:var(--clay);}
+  .path-card.adopt{border-top-color:var(--hay);}
+  .path-card .tag{font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:#8A7D63;}
+  .path-card h3{font-family:var(--font-display); font-size:1.35rem; margin:0; font-weight:600;}
+  .path-card p{color:#5A4E3D; font-size:0.94rem; margin:0; flex-grow:1;}
+  .path-card a.btn{align-self:flex-start; margin-top:6px;}
+
+  /* ---------- gate / accordion sections ---------- */
+  .gates{padding:56px 0 90px;}
+  .gate{
+    background:var(--panel);
+    border:1px solid var(--line);
+    margin-bottom:18px;
+  }
+  .gate-head{
+    width:100%;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+    background:none; border:none;
+    padding:22px 26px;
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+  }
+  .gate-head:hover .gate-title{color:var(--clay-dark);}
+  .gate-title-wrap{display:flex; align-items:center; gap:16px;}
+  .gate-icon{
+    width:38px; height:38px; flex-shrink:0;
+    border:1px solid var(--line);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--parchment);
+  }
+  .gate-title{font-family:var(--font-display); font-size:1.25rem; font-weight:600; color:var(--ink); transition:color .15s ease;}
+  .gate-sub{font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; color:#8A7D63; margin-top:4px;}
+  .latch{
+    width:22px; height:22px; flex-shrink:0;
+    transition:transform 0.28s cubic-bezier(.4,0,.2,1);
+    color:#8A7D63;
+  }
+  .gate[data-open="true"] .latch{transform:rotate(90deg); color:var(--clay);}
+
+  .gate-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.35s ease;
+  }
+  .gate[data-open="true"] .gate-body{max-height:6000px;}
+  .gate-inner{padding:0 26px 32px; border-top:1px solid var(--line); padding-top:26px;}
+
+  .status-pill{
+    display:inline-block;
+    font-family:var(--font-mono);
+    font-size:0.65rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    background:#EFE4C9;
+    color:#8A6A1F;
+    border:1px solid #D9C48F;
+    margin-bottom:18px;
+  }
+
+  /* ---------- form styling ---------- */
+  fieldset{border:none; padding:0; margin:0 0 26px;}
+  legend{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--clay-dark);
+    margin-bottom:14px;
+    padding:0;
+  }
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  @media (max-width:600px){.field-row{grid-template-columns:1fr;}}
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block;
+    font-size:0.86rem;
+    font-weight:500;
+    margin-bottom:6px;
+    color:var(--ink);
+  }
+  .field .hint{font-size:0.78rem; color:#8A7D63; margin-top:5px;}
+  input[type=text], input[type=email], input[type=tel], input[type=number], input[type=date], select, textarea{
+    width:100%;
+    font-family:var(--font-body);
+    font-size:0.96rem;
+    padding:11px 12px;
+    border:1px solid #C9B98F;
+    background:#fff;
+    color:var(--ink);
+    border-radius:2px;
+  }
+  textarea{resize:vertical; min-height:90px;}
+  input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible{
+    outline:2px solid var(--clay);
+    outline-offset:2px;
+  }
+  .check-row, .radio-row{display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:4px;}
+  .check-item, .radio-item{display:flex; align-items:flex-start; gap:8px; font-size:0.9rem;}
+  .check-item input, .radio-item input{margin-top:3px;}
+  .agree-box{
+    background:#F3E9D3;
+    border:1px solid var(--line);
+    padding:16px 18px;
+    margin:20px 0;
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .agree-box input{margin-top:4px;}
+  .agree-box label{font-size:0.88rem; margin:0;}
+  .required{color:var(--clay);}
+
+  .form-msg{display:none; margin-top:16px; padding:14px 16px; font-size:0.9rem;}
+  .form-msg.success{display:block; background:#E7EEDF; border:1px solid #B9CBA8; color:var(--success);}
+  .form-msg.error{display:block; background:#F4DCD0; border:1px solid #E0AF97; color:#9B3A1B;}
+
+  /* ---------- contract text ---------- */
+  .contract-text{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:24px 26px;
+    max-height:340px;
+    overflow-y:auto;
+    font-size:0.9rem;
+    margin-bottom:24px;
+  }
+  .contract-text h4{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--clay-dark);
+    margin:22px 0 6px;
+  }
+  .contract-text h4:first-child{margin-top:0;}
+  .contract-text p{margin:0 0 10px; color:#3A322A;}
+  .contract-text ul{margin:0 0 10px; padding-left:20px; color:#3A322A;}
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--charcoal);
+    color:#C9BBA0;
+    padding:44px 0 34px;
+    font-size:0.88rem;
+  }
+  footer .foot-grid{display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; margin-bottom:24px;}
+  footer h5{
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--hay);
+    margin:0 0 10px;
+  }
+  footer p{margin:0 0 6px;}
+  footer .legal{border-top:1px solid #45392A; padding-top:18px; font-size:0.78rem; color:#8A7D63;}
+
+  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a href="#top" class="brand">Journey With Equus<small>Get Involved</small></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#volunteer-application">Volunteer</a></li>
+      <li><a href="#foster-application">Foster</a></li>
+      <li><a href="#adoption-application">Adopt</a></li>
+      <li><a href="#contracts">Contracts</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="rail" aria-hidden="true"></div>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Liberty's Legacy Inc. · Journey With Equus</div>
+      <h1>Every application.<br><em>One place.</em></h1>
+      <p class="lede">Volunteer, foster, and adoption applications — plus contract intake — all in one spot. Fill it out, it comes straight to Candice.</p>
+      <div class="hero-ctas">
+        <a href="#volunteer-application" class="btn btn-primary">Apply to Volunteer</a>
+        <a href="#foster-application" class="btn btn-ghost">Apply to Foster</a>
+        <a href="#adoption-application" class="btn btn-ghost">Apply to Adopt</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="paths">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Choose your path</div>
+        <h2>Three ways in.</h2>
+        <p>Volunteering asks for your time. Fostering asks for your barn. Adopting asks for a lifetime.</p>
+      </div>
+      <div class="path-grid">
+        <div class="path-card">
+          <div class="tag">No horse leaves the sanctuary</div>
+          <h3>Volunteer</h3>
+          <p>Barn chores, feeding, grooming, event support. No experience required for most roles.</p>
+          <a href="#volunteer-application" class="btn btn-sage">Volunteer Application</a>
+        </div>
+        <div class="path-card foster">
+          <div class="tag">Temporary · horse stays sanctuary-owned</div>
+          <h3>Foster</h3>
+          <p>You provide the property and daily care. The horse stays sanctuary-owned the whole time.</p>
+          <a href="#foster-application" class="btn btn-clay">Foster Application</a>
+        </div>
+        <div class="path-card adopt">
+          <div class="tag">Permanent · ownership transfers</div>
+          <h3>Adopt</h3>
+          <p>A lifetime commitment. If life changes, the horse comes back to us — never to an auction.</p>
+          <a href="#adoption-application" class="btn" style="background:var(--hay); color:#241A13; font-weight:600;">Adoption Application</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gates" id="applications">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Applications &amp; Contracts</div>
+        <h2>Open a gate, fill it out.</h2>
+        <p>Every form here goes straight to Candice, with a confirmation the moment it's in.</p>
+      </div>
+
+      <!-- ============================= VOLUNTEER APPLICATION ============================= -->
+      <div class="gate" id="volunteer-application" data-open="false">
+        <button class="gate-head" data-gate-toggle aria-expanded="false">
+          <span class="gate-title-wrap">
+            <span class="gate-icon" aria-hidden="true">🐴</span>
+            <span>
+              <span class="gate-title">Volunteer Application</span>
+              <span class="gate-sub">Barn help · events · healing program support</span>
+            </span>
+          </span>
+          <svg class="latch" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="gate-body">
+          <div class="gate-inner">
+            <form name="volunteer-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
+              <input type="hidden" name="form-name" value="volunteer-application">
+              <p class="sr-only"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+
+              <fieldset>
+                <legend>Your Info</legend>
+                <div class="field-row">
+                  <div class="field"><label for="v-name">Full name <span class="required">*</span></label><input type="text" id="v-name" name="Full Name" required></div>
+                  <div class="field"><label for="v-dob">Date of birth <span class="required">*</span></label><input type="date" id="v-dob" name="Date of Birth" required></div>
+                </div>
+                <div class="field-row">
+                  <div class="field"><label for="v-email">Email <span class="required">*</span></label><input type="email" id="v-email" name="Email" required></div>
+                  <div class="field"><label for="v-phone">Phone <span class="required">*</span></label><input type="tel" id="v-phone" name="Phone" required></div>
+                </div>
+                <div class="field"><label for="v-address">Address (city &amp; state is fine)</label><input type="text" id="v-address" name="Address"></div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Availability</legend>
+                <div class="field">
+                  <label>Which days generally work? <span class="required">*</span></label>
+                  <div class="check-row">
+                    <label class="check-item"><input type="checkbox" name="Availability" value="Weekday mornings"> Weekday mornings</label>
+                    <label class="check-item"><input type="checkbox" name="Availability" value="Weekday afternoons"> Weekday afternoons</label>
+                    <label class="check-item"><input type="checkbox" name="Availability" value="Weekends"> Weekends</label>
+                    <label class="check-item"><input type="checkbox" name="Availability" value="Evenings"> Evenings</label>
+                    <label class="check-item"><input type="checkbox" name="Availability" value="Flexible / on-call"> Flexible / on-call</label>
+                  </div>
+                </div>
+                <div class="field"><label for="v-hours">Roughly how many hours a week can you give?</label><input type="text" id="v-hours" name="Hours Per Week" placeholder="e.g. 3-5 hours"></div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Experience &amp; Interests</legend>
+                <div class="field">
+                  <label>Experience with horses <span class="required">*</span></label>
+                  <div class="radio-row">
+                    <label class="radio-item"><input type="radio" name="Horse Experience" value="None, but willing to learn" required> None, but willing to learn</label>
+                    <label class="radio-item"><input type="radio" name="Horse Experience" value="Some (recreational)"> Some (recreational)</label>
+                    <label class="radio-item"><input type="radio" name="Horse Experience" value="Experienced / professional"> Experienced / professional</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>What areas interest you? <span class="required">*</span></label>
+                  <div class="check-row">
+                    <label class="check-item"><input type="checkbox" name="Areas of Interest" value="Barn chores & mucking"> Barn chores &amp; mucking</label>
+                    <label class="check-item"><input type="checkbox" name="Areas of Interest" value="Feeding"> Feeding</label>
+                    <label class="check-item"><input type="checkbox" name="Areas of Interest" value="Grooming"> Grooming</label>
+                    <label class="check-item"><input type="checkbox" name="Areas of Interest" value="Fencing / property maintenance"> Fencing &amp; property maintenance</label>
+                    <label class="check-item"><input type="checkbox" name="Areas of Interest" value="Event support"> Event support</label>
+                    <label class="check-item"><input type="checkbox" name="Areas of Interest" value="Equine healing program support"> Equine healing program support</label>
+                    <label class="check-item"><input type="checkbox" name="Areas of Interest" value="Admin / social media"> Admin / social media</label>
+                    <label class="check-item"><input type="checkbox" name="Areas of Interest" value="Driving / hauling"> Driving &amp; hauling</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Can you comfortably lift/carry a 50 lb hay bale? <span class="required">*</span></label>
+                  <div class="radio-row">
+                    <label class="radio-item"><input type="radio" name="Can Lift 50lb" value="Yes" required> Yes</label>
+                    <label class="radio-item"><input type="radio" name="Can Lift 50lb" value="No, but other roles interest me"> No, but other roles interest me</label>
+                  </div>
+                </div>
+                <div class="field"><label for="v-why">Why do you want to volunteer with Journey With Equus? <span class="required">*</span></label><textarea id="v-why" name="Why Volunteer" required></textarea></div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Emergency Contact</legend>
+                <div class="field-row">
+                  <div class="field"><label for="v-ec-name">Name <span class="required">*</span></label><input type="text" id="v-ec-name" name="Emergency Contact Name" required></div>
+                  <div class="field"><label for="v-ec-phone">Phone <span class="required">*</span></label><input type="tel" id="v-ec-phone" name="Emergency Contact Phone" required></div>
+                </div>
+              </fieldset>
+
+              <div class="agree-box">
+                <input type="checkbox" id="v-waiver" name="Waiver Acknowledged" value="Yes" required>
+                <label for="v-waiver">I understand that volunteering involves inherent risk working around large animals, and I agree to sign Journey With Equus's liability waiver in person before my first shift. <span class="required">*</span></label>
+              </div>
+
+              <button type="submit" class="btn btn-sage">Submit Volunteer Application</button>
+              <div class="form-msg success" data-success>Thank you — your volunteer application is in. Candice will reach out to schedule your first shift.</div>
+              <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================= FOSTER APPLICATION ============================= -->
+      <div class="gate" id="foster-application" data-open="false">
+        <button class="gate-head" data-gate-toggle aria-expanded="false">
+          <span class="gate-title-wrap">
+            <span class="gate-icon" aria-hidden="true">🌾</span>
+            <span>
+              <span class="gate-title">Foster Application</span>
+              <span class="gate-sub">Provide the property, we keep the ownership</span>
+            </span>
+          </span>
+          <svg class="latch" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="gate-body">
+          <div class="gate-inner">
+            <form name="foster-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
+              <input type="hidden" name="form-name" value="foster-application">
+              <p class="sr-only"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+
+              <fieldset>
+                <legend>Your Info</legend>
+                <div class="field-row">
+                  <div class="field"><label for="f-name">Full name <span class="required">*</span></label><input type="text" id="f-name" name="Full Name" required></div>
+                  <div class="field"><label for="f-phone">Phone <span class="required">*</span></label><input type="tel" id="f-phone" name="Phone" required></div>
+                </div>
+                <div class="field-row">
+                  <div class="field"><label for="f-email">Email <span class="required">*</span></label><input type="email" id="f-email" name="Email" required></div>
+                  <div class="field"><label for="f-address">Property address <span class="required">*</span></label><input type="text" id="f-address" name="Property Address" required></div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>The Property</legend>
+                <div class="field-row">
+                  <div class="field"><label for="f-own">Do you own or rent this property? <span class="required">*</span></label>
+                    <select id="f-own" name="Own or Rent" required>
+                      <option value="">Select one</option>
+                      <option>Own</option>
+                      <option>Rent (landlord has approved horses)</option>
+                    </select>
+                  </div>
+                  <div class="field"><label for="f-acres">Acreage available for the horse(s) <span class="required">*</span></label><input type="text" id="f-acres" name="Acreage" required></div>
+                </div>
+                <div class="field-row">
+                  <div class="field"><label for="f-fence">Fencing type &amp; condition <span class="required">*</span></label><input type="text" id="f-fence" name="Fencing" placeholder="e.g. 4-rail pipe, good condition" required></div>
+                  <div class="field"><label for="f-shelter">Shelter / run-in available? <span class="required">*</span></label>
+                    <select id="f-shelter" name="Shelter Available" required>
+                      <option value="">Select one</option>
+                      <option>Yes, dedicated run-in shelter</option>
+                      <option>Yes, barn stall</option>
+                      <option>No shelter currently</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field"><label for="f-current-horses">Number of horses currently on the property</label><input type="text" id="f-current-horses" name="Current Horses on Property"></div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Care Team</legend>
+                <div class="field-row">
+                  <div class="field"><label for="f-vet">Current veterinarian &amp; clinic</label><input type="text" id="f-vet" name="Veterinarian"></div>
+                  <div class="field"><label for="f-farrier">Current farrier</label><input type="text" id="f-farrier" name="Farrier"></div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Experience</legend>
+                <div class="field"><label for="f-experience">Describe your experience with horses (years, types handled) <span class="required">*</span></label><textarea id="f-experience" name="Experience" required></textarea></div>
+                <div class="field"><label for="f-why">Why do you want to foster? <span class="required">*</span></label><textarea id="f-why" name="Why Foster" required></textarea></div>
+                <div class="field">
+                  <label>Can you cover routine feed and farrier costs during the foster period? <span class="required">*</span></label>
+                  <div class="radio-row">
+                    <label class="radio-item"><input type="radio" name="Can Cover Costs" value="Yes" required> Yes</label>
+                    <label class="radio-item"><input type="radio" name="Can Cover Costs" value="Need to discuss"> Need to discuss with the sanctuary</label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>References</legend>
+                <div class="field-row">
+                  <div class="field"><label for="f-ref1">Reference 1 — name, phone, relationship <span class="required">*</span></label><input type="text" id="f-ref1" name="Reference 1" required></div>
+                  <div class="field"><label for="f-ref2">Reference 2 — name, phone, relationship <span class="required">*</span></label><input type="text" id="f-ref2" name="Reference 2" required></div>
+                </div>
+              </fieldset>
+
+              <div class="agree-box">
+                <input type="checkbox" id="f-homevisit" name="Home Visit Consent" value="Yes" required>
+                <label for="f-homevisit">I consent to a home/property visit by a Journey With Equus representative before placement, and periodically during the foster period. <span class="required">*</span></label>
+              </div>
+
+              <button type="submit" class="btn btn-clay">Submit Foster Application</button>
+              <div class="form-msg success" data-success>Thank you — your foster application is in front of Candice now. She'll follow up to schedule a property visit.</div>
+              <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================= ADOPTION APPLICATION ============================= -->
+      <div class="gate" id="adoption-application" data-open="false">
+        <button class="gate-head" data-gate-toggle aria-expanded="false">
+          <span class="gate-title-wrap">
+            <span class="gate-icon" aria-hidden="true">🏡</span>
+            <span>
+              <span class="gate-title">Adoption Application</span>
+              <span class="gate-sub">A lifetime home, with us watching your back</span>
+            </span>
+          </span>
+          <svg class="latch" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="gate-body">
+          <div class="gate-inner">
+            <form name="adoption-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
+              <input type="hidden" name="form-name" value="adoption-application">
+              <p class="sr-only"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+
+              <fieldset>
+                <legend>Your Info</legend>
+                <div class="field-row">
+                  <div class="field"><label for="a-name">Full name <span class="required">*</span></label><input type="text" id="a-name" name="Full Name" required></div>
+                  <div class="field"><label for="a-phone">Phone <span class="required">*</span></label><input type="tel" id="a-phone" name="Phone" required></div>
+                </div>
+                <div class="field-row">
+                  <div class="field"><label for="a-email">Email <span class="required">*</span></label><input type="email" id="a-email" name="Email" required></div>
+                  <div class="field"><label for="a-address">Property / boarding address <span class="required">*</span></label><input type="text" id="a-address" name="Property Address" required></div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>The Horse</legend>
+                <div class="field"><label for="a-horse">Is there a specific horse you're interested in? If not, that's okay — tell us what you're open to.</label><input type="text" id="a-horse" name="Horse of Interest"></div>
+                <div class="field">
+                  <label>Intended role for this horse <span class="required">*</span></label>
+                  <div class="check-row">
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Companion / pasture ornament"> Companion / pasture ornament</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Light riding"> Light riding</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Therapy / healing work"> Therapy / healing work</label>
+                    <label class="check-item"><input type="checkbox" name="Intended Use" value="Other"> Other (explain below)</label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Property &amp; Care</legend>
+                <div class="field-row">
+                  <div class="field"><label for="a-property-type">Own property, board, or lease? <span class="required">*</span></label>
+                    <select id="a-property-type" name="Property Type" required>
+                      <option value="">Select one</option>
+                      <option>Own property</option>
+                      <option>Board at a facility</option>
+                      <option>Lease land</option>
+                    </select>
+                  </div>
+                  <div class="field"><label for="a-vet">Veterinarian &amp; clinic (current or planned)</label><input type="text" id="a-vet" name="Veterinarian"></div>
+                </div>
+                <div class="field"><label for="a-experience">Describe your experience with horses <span class="required">*</span></label><textarea id="a-experience" name="Experience" required></textarea></div>
+                <div class="field"><label for="a-plan">If your life circumstances changed, what's your plan for this horse's long-term care? <span class="required">*</span></label><textarea id="a-plan" name="Long Term Plan" required></textarea></div>
+              </fieldset>
+
+              <fieldset>
+                <legend>References</legend>
+                <div class="field"><label for="a-ref">Veterinary or equine professional reference — name &amp; phone <span class="required">*</span></label><input type="text" id="a-ref" name="Reference" required></div>
+              </fieldset>
+
+              <div class="agree-box">
+                <input type="checkbox" id="a-return" name="Return Policy Acknowledged" value="Yes" required>
+                <label for="a-return">I understand that if I can no longer keep this horse, it must be returned to Journey With Equus — it may never be sold, given away, or sent to auction. <span class="required">*</span></label>
+              </div>
+
+              <button type="submit" class="btn" style="background:var(--hay); color:#241A13; font-weight:600;">Submit Adoption Application</button>
+              <div class="form-msg success" data-success>Thank you — your adoption application is in front of Candice now. She'll be in touch about next steps, including a property visit.</div>
+              <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head" id="contracts" style="margin-top:54px;">
+        <div class="eyebrow">Once you're approved</div>
+        <h2>Foster &amp; Adoption Contracts</h2>
+        <p>Approved fosters and adopters only. This isn't the contract itself — it's what Candice needs to send you the official one to sign.</p>
+      </div>
+
+      <!-- ============================= FOSTER CONTRACT (v2, final) ============================= -->
+      <div class="gate" id="foster-contract" data-open="false">
+        <button class="gate-head" data-gate-toggle aria-expanded="false">
+          <span class="gate-title-wrap">
+            <span class="gate-icon" aria-hidden="true">📋</span>
+            <span>
+              <span class="gate-title">Foster Agreement</span>
+              <span class="gate-sub">Read the full agreement · password required</span>
+            </span>
+          </span>
+          <svg class="latch" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="gate-body">
+          <div class="gate-inner">
+
+            <div class="pw-gate" data-pw-gate="foster">
+              <p class="hint" style="margin-bottom:10px;">Approved to foster? Enter the password Candice gave you.</p>
+              <div class="field-row" style="align-items:end;">
+                <div class="field"><label for="fc-pw">Password</label><input type="password" id="fc-pw"></div>
+                <div class="field" style="display:flex; align-items:flex-end;"><button type="button" class="btn btn-clay" data-pw-submit="foster">Unlock</button></div>
+              </div>
+              <div class="form-msg error" data-pw-error="foster">That's not quite right — check with Candice.</div>
+            </div>
+
+            <div class="pw-content" data-pw-content="foster" style="display:none;">
+              <span class="status-pill">Submitted Agreements Are Pending JWE Review &amp; Countersignature</span>
+
+              <div class="contract-text" tabindex="0" aria-label="Foster Agreement full text">
+                <p style="font-family:var(--font-mono); font-size:0.72rem; color:#8A7D63; text-transform:uppercase; letter-spacing:0.05em;">Liberty's Legacy Inc. dba Journey with Equus · 2470 Driftwood Circle, Elizabeth, CO 80107 · 303-688-3656 · Info@journeywithequus.com</p>
+
+                <p>This Foster Agreement (the "Agreement") is made between Liberty's Legacy Inc. dba Journey with Equus ("JWE") and the foster party identified below ("Foster"). Foster agrees to care for the horse described below for the purpose of providing a safe, healthy, and loving environment, and to abide by all anti-cruelty laws of the state in which the horse resides. The health, safety, and welfare of the horse are the paramount and controlling purpose of this Agreement, and every provision is to be read and enforced in favor of the horse's welfare.</p>
+
+                <p><strong>Purpose of This Foster Placement.</strong> JWE places horses in foster homes to give them a safe, stable place to settle and heal after what is often a traumatic history, including time in the auction pipeline or a kill pen, the length of which is frequently unknown. JWE seeks committed, long-term foster homes where a horse can decompress, be evaluated over time, and be safe, healthy, and loved. A foster placement may lead to one of two outcomes: the Foster may choose to adopt the horse (a "foster fail"), or the Foster helps JWE care for and evaluate the horse until JWE places it in a permanent adoptive home. By signing, Foster acknowledges and embraces this long-term purpose.</p>
+
+                <h4>A. Horse and Foster Information</h4>
+                <p>Collected in the form below: the horse's name, age/DOB, sex, height, breed, weight, registry and registration number if known, identifying description, and Foster's full legal name, phone, email, and the physical address where the horse will be kept.</p>
+
+                <h4>B. Ownership of the Horse</h4>
+                <p>The horse fostered under this Agreement remains the sole and exclusive property of JWE at all times. Foster acquires no ownership interest in the horse and may not sell, transfer, give away, lease, loan, or pledge the horse. Foster agrees to return the horse to JWE upon JWE's request. Because JWE retains ownership, JWE retains the decision-making authority described in this Agreement, including the authority over end-of-life decisions set out in Section E.</p>
+
+                <h4>C. Required Level of Care</h4>
+                <p>The level of care for fostered rescue horses shall meet the highest standards in the industry. Foster agrees to meet or exceed every item below for as long as the horse is in Foster's care. Failure to do so is a material breach of this Agreement.</p>
+                <ul>
+                  <li><strong>Feed:</strong> the horse must receive its required daily feed allowance together with plenty of good-quality grass and/or hay.</li>
+                  <li><strong>Water:</strong> no less than fifteen (15) gallons of fresh, clean water each day, in buckets or in regularly cleaned troughs, kept unfrozen in winter.</li>
+                  <li><strong>Pasture:</strong> at least one (1) acre of clear pasture with safe, acceptable fencing (no barbed wire as primary fencing for the horse).</li>
+                  <li><strong>Shelter:</strong> a three-sided shed in the paddock to block wind and inclement weather.</li>
+                  <li><strong>Turnout and living arrangement:</strong> the horse shall not live in a box stall. The horse must receive at least eight (8) hours of turnout in a paddock or pasture every day, except during genuinely dangerous or inclement weather. The horse may be stalled overnight provided this daily turnout minimum is met. The horse shall be allowed to live in a manner natural to a horse, with room to move and the companionship required below, and shall not be continuously confined, tethered, or picketed as its primary means of containment.</li>
+                  <li><strong>Companionship:</strong> horses are herd animals; the horse will not be fostered to a home without another horse or suitable companion.</li>
+                  <li><strong>Farrier:</strong> trimmed and/or shod by a qualified farrier, going no longer than every eight (8) weeks.</li>
+                  <li><strong>Dental:</strong> a qualified dental examination and floating at least once every twelve (12) months.</li>
+                  <li><strong>Vaccinations</strong> (standard veterinary protocol): Spring — Eastern/Western Encephalitis, Tetanus, Rabies, and any others recommended by your veterinarian; Fall — Influenza, Rhino, and any others recommended by your veterinarian.</li>
+                  <li><strong>Parasite control:</strong> deworming guided by fecal egg count testing, deworming the horse when testing or veterinary advice indicates it is needed, rather than on an automatic blanket rotation.</li>
+                  <li><strong>Work:</strong> Foster shall not work the horse beyond its physical limitations at any time, or put the horse in harm's way at any time.</li>
+                </ul>
+                <p>Variations in facility requirements may depend on the horse, the region, and the predominant weather. JWE is happy to visit and approve a facility accordingly.</p>
+
+                <h4>D. Veterinary Care, Costs, and Donations</h4>
+                <p><strong>1. Cost Responsibility — Routine vs. Emergency.</strong> Foster is responsible, at Foster's own expense, for the horse's routine care while in foster, including feed, farrier, dental, vaccinations and deworming as described in Section C, and ordinary wellness and veterinary maintenance. Emergency veterinary care must be approved by JWE in advance whenever it is reasonably possible to do so, and is handled as set out in the next paragraph. The arrangement below does not apply when the horse is injured off Foster's approved property or during the activities described in the Performance clause, in which case Foster bears those costs in full as stated there.</p>
+                <p><strong>2. Emergency Care — Approval, Commitment, and Reimbursement.</strong> In a veterinary emergency, Foster shall obtain prompt care for the horse and contact JWE as soon as possible. Except where immediate, life-saving action is required, Foster shall obtain JWE's approval before authorizing major emergency treatment. Foster understands that JWE is a nonprofit rescue that funds emergency care through donations and fundraising. For approved emergency care, Foster commits with the treating veterinarian for the cost of treatment and remains responsible to the veterinarian in the meantime. JWE is glad to fundraise for emergencies and will make reasonable efforts to do so and to reimburse Foster for approved emergency expenses; because fundraising takes time, Foster understands that reimbursement may be delayed or partial and depends on the funds actually raised. Foster agrees to explain to the emergency veterinarian that JWE is a nonprofit rescue that typically must fundraise to cover these costs, and is encouraged to ask whether the veterinarian offers a discount for nonprofit rescues, since the horse remains the property of a 501(c)(3) organization. If a diagnosed condition cannot be funded or treated, the horse shall be returned to JWE so JWE can arrange appropriate care.</p>
+                <p><strong>3. Foster-to-Adopt Election.</strong> A Foster who intends to adopt the horse may elect, in writing, to assume one hundred percent (100%) of the horse's expenses during the foster period, including all routine and emergency veterinary care. In that case, the emergency-care arrangement above (JWE approval, fundraising, and reimbursement) does not apply, and if the Foster later adopts the horse, there will be no adoption fee, in recognition of the Foster having relieved JWE of those costs. A Foster who instead relies on JWE's emergency-care arrangement above understands that an adoption fee (generally $1,500 to $3,500, depending on the horse) will apply if the Foster later adopts.</p>
+                <p><strong>4. Donation Support for Fostered Horses.</strong> JWE is working to create and promote a donation flow that will allow the public to donate toward the care of horses in foster, organized by individual horse. This donation flow is in development and not yet active. JWE cannot guarantee the amount, if any, that will be raised for any horse. Once active, donations designated through that flow for a specific horse in Foster's care will be transferred to Foster on a monthly basis, as and when such donations are received, to support that horse's care. This donation support does not change Foster's responsibility for routine care or the handling of emergency costs set out above.</p>
+                <p><strong>5. Use of Funds and Receipts.</strong> Any donation funds transferred to Foster, and any emergency reimbursement, shall be used solely for the care of the specific horse for which they were provided. Foster shall keep receipts and reasonable documentation showing how those funds were spent on the horse, and shall provide them to JWE on request and with the periodic check-ins. This protects donor intent and JWE's nonprofit recordkeeping.</p>
+                <p><strong>6. Tax Treatment of Foster Expenses.</strong> Expenses that Foster incurs caring for the horse and is not reimbursed for may be deductible by Foster as a charitable contribution, subject to IRS rules and Foster's individual circumstances. On request, JWE will provide written acknowledgment of Foster's volunteer service to help support such a deduction. Expenses that JWE reimburses (including approved emergency care) are not deductible by Foster. Foster should consult their own CPA or tax advisor about what may and may not be deducted and how to structure and document it; JWE does not provide tax, accounting, or legal advice.</p>
+                <p><strong>7. Pre-Departure Check.</strong> It is advised that Foster pay for a veterinary check before the horse departs JWE's facility.</p>
+                <p><strong>8. No Guarantee of Rideability, Training, or Temperament.</strong> JWE makes no representation, guarantee, or warranty as to whether the horse is rideable, its level or quality of training, or its behavior or safety under saddle or when handled. Many horses arrive with unknown histories. Foster assumes all risk associated with handling, riding, or working the horse, and understands the horse may be untrained, unsound, or unsafe to ride.</p>
+                <p><strong>9. Veterinary Soundness Evaluation Before Riding.</strong> Because the horse's physical condition and history are often unknown, Foster shall not ride or work the horse under saddle unless and until a licensed veterinarian has evaluated the horse's soundness, including its legs and back, and cleared the horse for that use. This requirement protects the horse from being worked through pain or injury and reduces the risk of injury to people. Foster shall also allow the horse adequate time (at least seven (7) days, and longer if needed) to acclimate before any riding.</p>
+                <p><strong>10. Performance, Competition, and Off-Property Use.</strong> Even after the horse has been cleared to ride, the horse shall not be used for barrel racing, pole bending, flag or other speed events, roping, jumping, gaming, or any other strenuous or competitive activity until all of the following are met: (i) a licensed veterinarian has specifically evaluated and cleared the horse for that level of work; (ii) the horse has reached and is maintaining a healthy body condition (a Henneke body condition score of at least 5), as most rescue horses must first regain weight and condition before being asked to perform; and (iii) JWE has given its prior written approval. Whenever the horse is trailered or taken off Foster's approved property for any activity, Foster assumes one hundred percent (100%) of the responsibility and liability for the horse — including any injury, illness, lameness, loss, theft, or death of the horse, and any injury or damage to any person or property — and Foster indemnifies and holds JWE harmless for all of it. Notwithstanding JWE's general responsibility for emergency veterinary care, if the horse is injured while off Foster's approved property, Foster is solely and one hundred percent (100%) responsible for all emergency and follow-up veterinary care and its full cost; JWE will not assume that cost. Foster is responsible for safe transport and handling and is strongly encouraged to carry appropriate equine liability and mortality insurance for any such activity.</p>
+
+                <h4>E. End-of-Life Decisions (Euthanasia)</h4>
+                <p>Because the horse remains the property of JWE, end-of-life decisions belong to JWE.</p>
+                <p><strong>11. Euthanasia Requires JWE Approval.</strong> The horse shall not be euthanized without JWE's prior approval, except in a genuine, immediately life-threatening emergency in which the horse is suffering and that suffering cannot be relieved — such as a severe colic confirmed to be non-survivable, or a catastrophic injury — and only where a licensed veterinarian who is physically present confirms that nothing further can be done and that waiting would only prolong the horse's suffering. In every other circumstance — including lameness, a condition believed to be unfixable, or a veterinarian's recommendation to euthanize a horse that is not in uncontrollable distress — Foster must contact JWE and obtain JWE's approval before any euthanasia is performed. JWE may obtain a second opinion, direct further diagnostics or supportive care, or resume responsibility for the horse. If JWE cannot be immediately reached in a non-emergency situation, Foster shall continue supportive care and keep attempting to reach JWE rather than proceed. The horse is not presumed a candidate for colic or other major surgery; any elective or major surgery requires JWE's prior approval, and Foster is responsible for its cost only if Foster chooses to pursue it with JWE's consent.</p>
+
+                <h4>F. Monitoring, Check-Ins, and Visits</h4>
+                <p><strong>12. Mandatory Check-In Schedule.</strong> Beginning on the date the horse leaves JWE's custody, Foster agrees to complete a check-in with JWE (by the method JWE designates, including an online form) with current photographs of the horse, on the following schedule: within 24 hours of arrival; within 72 hours of arrival; at 30 days; and every 90 days thereafter for as long as the horse is in foster. Foster agrees to respond to each check-in, and to any reasonable request from JWE for an update or photographs, within five (5) days.</p>
+                <p><strong>13. Visits.</strong> JWE reserves the right to visit the horse at any time with forty-eight (48) hours' advance notice to Foster. Where JWE has a reasonable concern for the horse's welfare, Foster consents to an expedited visit on shorter notice. Refusal to permit reasonable visits is a material breach.</p>
+
+                <h4>G. Restrictions on Use and Transfer</h4>
+                <p><strong>14. No Transfer.</strong> Foster shall not sell, give away, lease, loan, trade, or otherwise transfer possession of the horse to any person without JWE's prior written approval. The horse shall remain with the named Foster unless JWE agrees otherwise in writing.</p>
+                <p><strong>15. No Auction or Slaughter.</strong> The horse shall never be sold, sent, or surrendered to auction, a kill pen, a broker, or to slaughter, whether through the direct or indirect action or inaction of Foster. <em>(You'll initial this below.)</em></p>
+                <p><strong>16. No Breeding.</strong> UNDER NO CIRCUMSTANCES SHALL THE HORSE BE USED FOR BREEDING PURPOSES. <em>(You'll initial this below.)</em></p>
+                <p><strong>17. No Prohibited Uses.</strong> Foster shall never allow the horse to be used for equine experimentation, Premarin production, as rough stock in rodeos, for racing, or for cruel sports such as equine "tripping," and shall use only safe, humane, and ethical methods of handling and training.</p>
+
+                <h4>H. Location and Relocation</h4>
+                <p><strong>18. Approved Location.</strong> The horse shall be kept at the location identified in Section A, which JWE may inspect and approve. The horse may not be moved to a new location, nor placed in a commercial or typical boarding situation, without JWE's prior written approval and signed site approval; JWE will not approve any arrangement in which the horse lives in a box stall or receives less than eight (8) hours of daily turnout (except during genuinely dangerous weather). Foster shall keep the horse within a distance reasonable for JWE to conduct visits and shall not relocate the horse out of state without JWE's prior written approval.</p>
+
+                <h4>I. Required Notifications</h4>
+                <p>Foster agrees to contact JWE immediately for any of the following:</p>
+                <ul>
+                  <li>If Foster can no longer care for the horse.</li>
+                  <li>If the horse becomes seriously injured or ill.</li>
+                  <li>If the horse dies.</li>
+                </ul>
+
+                <h4>J. Return and Reclamation</h4>
+                <p><strong>19. Return at Any Time.</strong> The foster horse can be returned to JWE at any time, regardless of reason, and must be returned if Foster can no longer provide a safe, healthy, and loving home.</p>
+                <p><strong>20. JWE's Right to Recover.</strong> JWE holds the right to recover the horse if it is ever abused, abandoned, neglected, starved, mistreated, or otherwise endangered in any way, or if Foster fails to abide by the Required Level of Care or breaches any term of this Agreement. Foster consents in advance to surrender the horse to JWE on demand, and shall be responsible for JWE's reasonable costs of recovery and transport.</p>
+
+                <h4>K. Transport and Liability</h4>
+                <p><strong>21. Transport Costs.</strong> All shipping costs, including departing transport, transport while the horse is away, and return transport, are to be paid by Foster.</p>
+                <p><strong>22. Liability.</strong> JWE is not responsible for any accidents or injuries to the horse or to Foster after the horse leaves JWE's facility.</p>
+
+                <h4>L. Disclosure and Release</h4>
+                <p>Foster represents, warrants, and declares awareness of the following in connection with fostering the horse from JWE:</p>
+                <ul>
+                  <li><strong>A)</strong> That horses are different from human beings in their responses to human actions;</li>
+                  <li><strong>B)</strong> That the actions of horses are often unpredictable;</li>
+                  <li><strong>C)</strong> That horses should be closely and carefully supervised when they are with or around children;</li>
+                  <li><strong>D)</strong> That the horse's behavior may change after it leaves JWE's facility;</li>
+                  <li><strong>E)</strong> That a horse in a new environment may act differently, and Foster will afford the horse adequate time (at least 7 days) to acclimate before being ridden, to the extent the horse is rideable;</li>
+                  <li><strong>F)</strong> That any statements made by JWE or its representatives regarding the horse, orally or in this Agreement, are merely opinions given solely as a courtesy and are not claims, representations, or warranties as to the temperament, health, mental disposition, rideability, level of training, or behavior under saddle of the horse for Foster's intended purposes;</li>
+                  <li><strong>G)</strong> Foster releases, discharges, indemnifies, and holds harmless JWE from and against any and all claims, liens, damages, losses, and causes of action that may be asserted by Foster or any third party for injury or damage to any person, property, or thing whatsoever caused directly or indirectly by the horse.</li>
+                </ul>
+                <p><em>(You'll initial Subsections A–G below.)</em></p>
+
+                <h4>M. General Provisions</h4>
+                <p><strong>23. Entire Agreement.</strong> This Agreement represents the entire agreement between the parties. No other agreement or promise, verbal or implied, is included unless specifically stated in writing. Any amendment must be in writing and signed by both parties.</p>
+                <p><strong>24. Severability and Governing Law.</strong> If any provision is held invalid or unenforceable, the remaining provisions remain in full force and effect. This Agreement is governed by the laws of the State of Colorado.</p>
+                <p><strong>25. Electronic Signature.</strong> The parties agree this Agreement may be signed electronically, that an electronic signature has the same force and effect as a handwritten signature, and that it may be executed in counterparts, each deemed an original.</p>
+
+                <h4>N. Acknowledgment and Signature</h4>
+                <p>"I have read and understand the conditions of this Foster Agreement and agree to uphold the highest level of care for the fostered horse." Signed electronically below, per Section M.25. JWE's Authorized Representative countersigns separately after review.</p>
+              </div>
+
+              <form name="foster-contract" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
+                <input type="hidden" name="form-name" value="foster-contract">
+                <p class="sr-only"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+
+                <fieldset>
+                  <legend>A. Horse Information</legend>
+                  <div class="field"><label for="fc-horse">Which horse are you fostering? <span class="required">*</span></label><input type="text" id="fc-horse" name="Horse Name" required></div>
+                  <p class="hint">Age, breed, weight, registry number, and other horse specifics are completed by JWE on the final agreement — not something you need to fill in.</p>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Foster Information</legend>
+                  <div class="field"><label for="fc-name">Foster full legal name <span class="required">*</span></label><input type="text" id="fc-name" name="Full Legal Name" required></div>
+                  <div class="field-row">
+                    <div class="field"><label for="fc-email">Email <span class="required">*</span></label><input type="email" id="fc-email" name="Email" required></div>
+                    <div class="field"><label for="fc-phone">Phone <span class="required">*</span></label><input type="tel" id="fc-phone" name="Phone" required></div>
+                  </div>
+                  <div class="field"><label for="fc-mailing">Your home / mailing address <span class="required">*</span></label><input type="text" id="fc-mailing" name="Mailing Address" required></div>
+                  <div class="field">
+                    <label class="check-item" style="margin-bottom:8px;"><input type="checkbox" id="fc-same" checked> Horse will be kept at this same address</label>
+                    <div id="fc-horse-address-wrap" style="display:none;">
+                      <label for="fc-horse-address">Physical address where the horse will be kept <span class="required">*</span></label>
+                      <input type="text" id="fc-horse-address" name="Horse Address">
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Clause 3 — Foster-to-Adopt Election (optional)</legend>
+                  <div class="field">
+                    <label>Do you intend to foster-to-adopt and assume 100% of the horse's expenses, including emergency care, during the foster period? Doing so waives the adoption fee if you later adopt.</label>
+                    <div class="radio-row">
+                      <label class="radio-item"><input type="radio" name="Foster-to-Adopt Election" value="Yes, I elect to assume 100% of expenses"> Yes, I elect to assume 100% of expenses</label>
+                      <label class="radio-item"><input type="radio" name="Foster-to-Adopt Election" value="No, I'll rely on JWE's emergency-care arrangement"> No, I'll rely on JWE's emergency-care arrangement</label>
+                      <label class="radio-item"><input type="radio" name="Foster-to-Adopt Election" value="Undecided"> Undecided for now</label>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Required Initials</legend>
+                  <div class="field-row">
+                    <div class="field"><label for="fc-init-15">Clause 15 — No Auction or Slaughter <span class="required">*</span></label><input type="text" id="fc-init-15" name="Initials - No Auction or Slaughter" maxlength="6" placeholder="Initials" required></div>
+                    <div class="field"><label for="fc-init-16">Clause 16 — No Breeding <span class="required">*</span></label><input type="text" id="fc-init-16" name="Initials - No Breeding" maxlength="6" placeholder="Initials" required></div>
+                  </div>
+                  <div class="field"><label for="fc-init-l">Section L — Disclosure &amp; Release (Subsections A–G) <span class="required">*</span></label><input type="text" id="fc-init-l" name="Initials - Disclosure and Release" maxlength="6" placeholder="Initials" required></div>
+                </fieldset>
+
+                <div class="agree-box">
+                  <input type="checkbox" id="fc-agree" name="Terms Agreed" value="Yes" required>
+                  <label for="fc-agree">I have read and understand this Foster Agreement in full, agree to uphold the highest level of care for the fostered horse, and understand that typing my name below is my electronic signature with the same legal effect as a handwritten one (Section M.25). <span class="required">*</span></label>
+                </div>
+
+                <div class="field-row">
+                  <div class="field"><label for="fc-sig">Type your full legal name as your signature <span class="required">*</span></label><input type="text" id="fc-sig" name="Digital Signature" required></div>
+                  <div class="field"><label for="fc-date">Date <span class="required">*</span></label><input type="date" id="fc-date" name="Date" required></div>
+                </div>
+
+                <button type="submit" class="btn btn-clay">Submit Foster Agreement</button>
+                <p class="hint" style="margin-top:8px;">This goes to Candice for review. It's final once JWE's Authorized Representative countersigns.</p>
+                <div class="form-msg success" data-success>Received — this Foster Agreement is pending JWE's review and countersignature.</div>
+                <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================= ADOPTION CONTRACT (v2, final) ============================= -->
+      <div class="gate" id="adoption-contract" data-open="false">
+        <button class="gate-head" data-gate-toggle aria-expanded="false">
+          <span class="gate-title-wrap">
+            <span class="gate-icon" aria-hidden="true">📜</span>
+            <span>
+              <span class="gate-title">Adoption Contract</span>
+              <span class="gate-sub">Read the full agreement · password required</span>
+            </span>
+          </span>
+          <svg class="latch" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="gate-body">
+          <div class="gate-inner">
+
+            <div class="pw-gate" data-pw-gate="adopt">
+              <p class="hint" style="margin-bottom:10px;">Approved to adopt? Enter the password Candice gave you.</p>
+              <div class="field-row" style="align-items:end;">
+                <div class="field"><label for="ac-pw">Password</label><input type="password" id="ac-pw"></div>
+                <div class="field" style="display:flex; align-items:flex-end;"><button type="button" class="btn" style="background:var(--hay); color:#241A13; font-weight:600;" data-pw-submit="adopt">Unlock</button></div>
+              </div>
+              <div class="form-msg error" data-pw-error="adopt">That's not quite right — check with Candice.</div>
+            </div>
+
+            <div class="pw-content" data-pw-content="adopt" style="display:none;">
+              <span class="status-pill">Submitted Agreements Are Pending JWE Review &amp; Countersignature</span>
+
+              <div class="contract-text" tabindex="0" aria-label="Adoption Contract full text">
+                <p style="font-family:var(--font-mono); font-size:0.72rem; color:#8A7D63; text-transform:uppercase; letter-spacing:0.05em;">Liberty's Legacy Inc. dba Journey with Equus · 2470 Driftwood Circle, Elizabeth, CO 80107 · 303-688-3656 · Info@journeywithequus.com</p>
+
+                <p>This Adoption Contract (the "Agreement") is a legally binding instrument between Liberty's Legacy Inc. dba Journey with Equus ("JWE") and the adopting party identified below ("Adopter"). The health, safety, and lifelong welfare of the equine are the paramount and controlling purpose of this Agreement, and every provision is to be read and enforced in favor of the equine's welfare. All adopters are required to sign this Agreement in order to help ensure the safety of the equine's future. Signature is mandatory; JWE will not release any equine without it.</p>
+
+                <h4>A. Equine and Adopter Information</h4>
+                <p>Collected in the form below: the equine's name, registered name if any, breed, color, sex, age, microchip/tattoo/brand number, known medical conditions, Adopter's full legal name, phone, email, physical address, co-adopter if any, the adoption deposit and fee, balance due date, and whether the equine will be kept at Adopter's home or an approved boarding facility.</p>
+
+                <h4>B. Defined Standard of Care</h4>
+                <p>Throughout this Agreement, the "Standard of Care" means, at minimum, all of the following. Adopter agrees to meet or exceed every item for the entire life of the equine. Failure to meet the Standard of Care is a material breach of this Agreement.</p>
+                <ul>
+                  <li><strong>Nutrition:</strong> a forage-based diet in quantity and quality sufficient to keep the equine at a body condition score of 5 to 7 on the Henneke scale, adjusted for age, workload, and health.</li>
+                  <li><strong>Water:</strong> clean, fresh, unfrozen water available at all times, including in winter.</li>
+                  <li><strong>Shelter:</strong> safe shelter providing protection from sun, wind, precipitation, and extreme heat and cold at all times.</li>
+                  <li><strong>Footing and fencing:</strong> safe, secure, properly maintained fencing and turnout free of hazards; no barbed wire as primary fencing for the equine.</li>
+                  <li><strong>Living arrangement and turnout:</strong> the equine shall not live in a box stall. The equine must receive at least eight (8) hours of turnout in a paddock or pasture every day, except during genuinely dangerous or inclement weather, and may be stalled overnight provided this daily turnout minimum is met. The equine shall be permitted to live in a manner natural to a horse, with room to move and the companionship described below, and shall not be continuously confined, tethered, or picketed as its primary means of containment.</li>
+                  <li><strong>Companionship:</strong> equines are herd animals; the equine shall not be kept in prolonged social isolation and shall have appropriate equine or other suitable companionship.</li>
+                  <li><strong>Hoof care:</strong> professional farrier care at intervals not exceeding eight (8) weeks, or more often as the equine's needs require.</li>
+                  <li><strong>Dental care:</strong> a qualified dental examination and floating at least once every twelve (12) months, or more often as needed.</li>
+                  <li><strong>Veterinary care:</strong> routine examinations and prompt veterinary attention for any illness or injury.</li>
+                  <li><strong>Vaccinations:</strong> core vaccinations kept current in accordance with standard veterinary protocol and as recommended by a licensed veterinarian, including rabies and any vaccines required by law.</li>
+                  <li><strong>Parasite control:</strong> a deworming program guided by fecal egg count testing, deworming the equine when testing or veterinary advice indicates it is needed, rather than on an automatic blanket schedule.</li>
+                  <li><strong>Identification:</strong> any microchip, brand, or tattoo identifying the equine shall remain in place and shall not be altered, removed, or obscured.</li>
+                  <li><strong>Humane handling:</strong> only safe, humane, and ethical methods of handling, training, and discipline.</li>
+                </ul>
+
+                <h4>C. Ownership, Payment, and Brand Inspection</h4>
+                <p><strong>1. Payment and Ownership.</strong> Adopter agrees to pay the full adoption fee stated above and understands that the equine remains the legal property of JWE until such time as the brand inspection is transferred to Adopter by JWE. If full payment of the adoption fee is not received by the due date stated above, Adopter shall, at its own expense, return the equine to JWE, pay all costs and fees involved (veterinary, inspection, transport, and similar), and forfeit the Adoption Deposit.</p>
+                <p><strong>2. Adoption Following Foster.</strong> Adoption from JWE typically follows a foster period of approximately one (1) year, during which the equine settles after its prior history and the placement is evaluated for fit. Where the Adopter fostered this equine before adopting, the parties acknowledge that prior foster relationship, and the fee provision below reflects how the equine's expenses were handled during that period.</p>
+                <p><strong>3. Adoption Fee and Fee Waiver.</strong> JWE's standard adoption fee depends on the individual equine and generally ranges from $1,500 to $3,500; the fee for this equine is stated in Section A. There will be no adoption fee where the Adopter fostered the equine and, during the foster period, assumed one hundred percent (100%) of the equine's expenses — including all routine and emergency veterinary care — thereby relieving JWE of those costs. Where JWE paid, covered, or fundraised for the equine's emergency veterinary care during the foster period, the adoption fee applies and is due as stated in Section A.</p>
+                <p><strong>4. Brand Inspection and Co-Ownership.</strong> JWE will retain possession of the brand inspection for at least twelve (12) months from the date of this Agreement. After that time, Adopter may request in writing that JWE add Adopter to the brand inspection. Within a reasonable period after receiving the request, JWE will inspect the facilities where the equine is kept and assess whether the terms of this Agreement are being reasonably fulfilled. If, in its sole discretion, JWE is reasonably satisfied that the equine is receiving the care required by this Agreement, JWE will facilitate updating the brand inspection to include Adopter's name. JWE will remain on the brand inspection as a co-owner for the life of the equine to ensure this Agreement is not breached, including any unauthorized re-sale or transfer of the equine.</p>
+
+                <h4>D. Care and Welfare Obligations</h4>
+                <p><strong>5. Provision of a Proper Home.</strong> Adopter agrees to provide the equine a loving home that meets or exceeds the Standard of Care defined in Section B at all times, including proper food, fresh water, adequate exercise, a secure and safe living environment, and appropriate shelter.</p>
+                <p><strong>6. Veterinary, Hoof, and Dental Care.</strong> Adopter agrees to provide veterinary, hoof, and dental care as needed to maintain the equine's good health, consistent with the Standard of Care in Section B, including core vaccinations kept current under standard veterinary protocol. Parasite control shall be guided by fecal egg count testing rather than blanket scheduled deworming, as described in Section B.</p>
+                <p><strong>7. As-Is Adoption; Assumption of Risk.</strong> Adopter adopts the equine as is. All responsibility for risks associated with, and liability for, the care and control of the equine transfers to Adopter from the date this Agreement is signed forward, unless otherwise agreed in writing. Adopter assumes all responsibility for treatment of any and all existing conditions and any that may later occur. JWE is not responsible or liable for any injury or damage caused by the equine, nor for any veterinary, medical, or other expense incurred after the date of adoption unless prearranged and agreed in writing.</p>
+                <p><strong>8. No Warranty of Information.</strong> All information about the equine (breed, age, history, temperament, and similar) is based on details provided by previous owners, a veterinarian, or JWE and may not be accurate. JWE makes every effort to disclose known medical conditions in the Addendum, but makes no guarantee as to the health of any equine offered for adoption.</p>
+                <p><strong>9. No Guarantee of Rideability; Soundness Before Riding.</strong> JWE makes no representation, guarantee, or warranty as to whether the equine is rideable, its level or quality of training, or its behavior or safety under saddle. For the equine's welfare and the safety of people, Adopter shall not ride or work the equine under saddle until a licensed veterinarian has evaluated the equine's soundness, including its legs and back, and cleared it for that use, and the equine has reached and is maintaining a healthy body condition appropriate for the intended work.</p>
+
+                <h4>E. Monitoring, Check-Ins, and Photo Updates</h4>
+                <p>It is the intention of JWE to monitor the care, health, and welfare of the equine for its entire life. Adopter expressly consents to the following and understands that these obligations are a material part of this Agreement.</p>
+                <p><strong>10. Mandatory Check-In Schedule.</strong> Beginning on the date the equine leaves JWE's custody, Adopter agrees to complete a check-in with JWE (by the method JWE designates, including an online form) on the following schedule, each of which must include current photographs of the equine: within 24 hours of arrival; within 72 hours of arrival; at 30 days; and every 90 days thereafter, for the life of the equine.</p>
+                <p><strong>11. Response and Access.</strong> Adopter agrees to respond to each scheduled check-in, and to any reasonable request from JWE for an update or photographs, within five (5) days. Adopter further agrees to allow JWE personnel to make reasonable visits to the equine's location, to take calls and respond to emails from JWE regarding the equine's condition. Routine visits will be scheduled by appointment within a reasonable timeframe after JWE's request. Where JWE has a reasonable concern for the equine's welfare, Adopter consents to an expedited visit on short notice. Failure or refusal to respond to check-ins or to permit scheduled visits within a reasonable timeframe is a material breach and may result in JWE reclaiming the equine.</p>
+
+                <h4>F. Restrictions on Use and Transfer</h4>
+                <p><strong>12. No Unauthorized Transfer.</strong> Adopter shall not sell, give away, lease, loan, trade, surrender, or otherwise transfer possession or ownership of the equine to any person or entity without the prior written approval of JWE. JWE must approve any proposed new home, and any new keeper or owner must first sign an agreement with JWE substantially identical to this one. The equine shall not be used as collateral or be subject to any lien.</p>
+                <p><strong>13. No Auction or Slaughter.</strong> Adopter agrees that the equine shall never be sold, sent, or surrendered to auction, a kill pen, a broker, or to slaughter, whether through the direct or indirect action or inaction of Adopter. <em>(You'll initial this below.)</em></p>
+                <p><strong>14. No Breeding.</strong> Adopter agrees that the equine shall not be used for breeding purposes. <em>(You'll initial this below.)</em></p>
+                <p><strong>15. No Prohibited Uses.</strong> Adopter agrees never to allow the equine to be used for equine experimentation, Premarin production, as rough stock in rodeos, for racing, or for cruel sports such as equine "tripping." <em>(You'll initial this below.)</em></p>
+                <p><strong>16. Lawful, Humane Treatment.</strong> Adopter agrees to use safe, humane, and ethical methods of handling and training, and to comply with all state and local laws and ordinances regarding the keeping and care of equines.</p>
+
+                <h4>G. Location and Relocation of the Equine</h4>
+                <p><strong>17. Approved Location and Boarding.</strong> The equine shall be kept at the location identified in Section A. JWE generally prefers that the Adopter keep the equine on the Adopter's own property. Boarding the equine at a commercial or typical boarding stable requires JWE's prior written approval, and JWE will not approve any arrangement in which the equine lives in a box stall or receives less than eight (8) hours of daily turnout (except during genuinely dangerous weather); any approved location must provide paddock or pasture turnout consistent with Section B. The equine may not be moved to a new location without JWE's signed site approval. Adopter must notify JWE in writing at least fourteen (14) days before any move and provide the new address and contact information. JWE may decline to approve a location it reasonably determines does not meet the Standard of Care, and may require an inspection before approval. Adopter shall keep the equine within a distance reasonable for JWE to conduct inspections, and shall not relocate the equine out of state without JWE's prior written approval.</p>
+
+                <h4>H. Lifetime Commitment and Return Policy</h4>
+                <p><strong>18. Lifetime Placement; Right of Return to JWE.</strong> Adopter understands that equines adopted from JWE are intended to be cared for by Adopter for the remainder of the equine's natural life. Should Adopter for any reason become unable or unwilling to keep the equine, JWE shall be notified immediately and the equine shall be returned to JWE. JWE will always accept a returned equine for the duration of its lifetime, regardless of age or condition. If an adoption ends, the equine shall be returned to JWE's location upon fourteen (14) days' notice from Adopter; Adopter may instead keep the equine, in compliance with the Standard of Care, while JWE secures a new home.</p>
+                <p><strong>19. Refund Terms on Return.</strong> Fifty percent (50%) of the adoption fee will be returned to Adopter if the equine is returned within two (2) months of the contract date, provided Adopter transports the equine to JWE's facility and the equine returns with current hoof care, current vaccines, proper dental care, and at a body condition of 5–7 on the Henneke scale. If JWE must transport the equine, the cost of transport will be deducted from any refundable amount. No fee will be refunded if the equine returns underweight or reasonably showing signs of abuse or neglect as determined by JWE. If the equine lacks current hoof, vaccine, or dental care, the cost to provide those services will be deducted from any refundable amount.</p>
+
+                <h4>I. Serious Illness, Emergency, and Death</h4>
+                <p><strong>20. Notice of Illness, Injury, or Death.</strong> Adopter shall notify JWE as soon as reasonably practicable of any serious illness, significant injury, surgery, theft, escape, or death of the equine.</p>
+                <p><strong>21. Humane Euthanasia.</strong> The equine shall be euthanized only when humane and necessary to relieve suffering, and only upon the recommendation of a licensed veterinarian, except in a bona fide emergency where immediate action is required to relieve suffering. Adopter shall notify JWE of any euthanasia as soon as reasonably practicable and, except in an emergency, shall make reasonable effort to notify JWE beforehand. The equine's remains shall not be sold or transferred for slaughter, rendering, or commercial profit.</p>
+
+                <h4>J. Inspection and Reclamation Rights</h4>
+                <p><strong>22. Right to Reclaim.</strong> If JWE reasonably determines that the equine is being neglected, abused, kept below the Standard of Care, endangered, or that Adopter has breached any term of this Agreement, JWE shall have the immediate right to reclaim and take possession of the equine, and Adopter consents in advance to surrender the equine to JWE upon demand. Adopter shall be responsible for JWE's reasonable costs of recovery and transport. Where the equine is reclaimed for neglect, abuse, or breach, no portion of any fee shall be refunded.</p>
+
+                <h4>K. Liability and Indemnification</h4>
+                <p><strong>23. Indemnification.</strong> From the date of signing forward, Adopter assumes all liability arising from ownership, care, and control of the equine, and agrees to indemnify, defend, and hold harmless JWE and its officers, directors, employees, volunteers, and agents from any and all claims, damages, costs, and expenses arising out of or relating to the equine after the date of adoption.</p>
+                <p><strong>24. Equine Activity Warning.</strong> Adopter acknowledges the inherent risks of equine activities. Under Colorado law, an equine professional or owner is not liable for the inherent risks of equine activities; this acknowledgment does not waive any right that cannot be waived by law.</p>
+
+                <h4>L. Breach, Damages, and Dispute Resolution</h4>
+                <p><strong>25. Liquidated Damages and Costs.</strong> If Adopter fails to comply with any term of this Agreement, Adopter agrees to pay JWE an additional $5,000, plus all attorneys' fees and all costs of legal action, including litigation and arbitration, that JWE may incur to enforce this Agreement. Adopter acknowledges that this amount is reasonable and just compensation in light of JWE's charitable purpose to provide for the humane care of horses and the difficulty of accurately estimating harm at the time of signing. These costs are due whether or not JWE exercises its option to repossess the equine, and are in addition to, not in place of, JWE's right to reclaim the equine.</p>
+                <p><strong>26. Arbitration and Jurisdiction.</strong> Any conflict or claim arising out of or relating to this Agreement, or its breach, shall be settled by binding and final arbitration administered by the American Arbitration Association, with jurisdiction and venue in the State of Colorado. Judgment on the award rendered may be entered in any court having jurisdiction.</p>
+
+                <h4>M. General Provisions</h4>
+                <p><strong>27. Entire Agreement.</strong> This Agreement, together with any signed Addendum, represents the entire agreement between the parties. No other agreement or promise, verbal or implied, is included unless specifically stated in this written Agreement. Any amendment must be in writing and signed by both parties.</p>
+                <p><strong>28. Severability.</strong> If any provision of this Agreement is held invalid or unenforceable, the remaining provisions shall remain in full force and effect, and the invalid provision shall be enforced to the greatest extent permitted by law.</p>
+                <p><strong>29. Governing Law and Notices.</strong> This Agreement is governed by the laws of the State of Colorado. Notices under this Agreement may be given by email to the addresses on file or by mail to the addresses stated above and in Section A, and are effective when sent.</p>
+                <p><strong>30. Electronic Signature.</strong> The parties agree that this Agreement may be signed electronically, that an electronic signature has the same force and effect as a handwritten signature, and that the Agreement may be executed in counterparts, each of which is deemed an original.</p>
+                <p><strong>31. No Legal or Tax Advice.</strong> JWE does not provide legal, tax, or accounting advice. Adopter is encouraged to consult their own attorney, CPA, or tax advisor with any questions about this Agreement or the tax treatment of any adoption fee or donation.</p>
+
+                <h4>N. Acknowledgment and Signature</h4>
+                <p>By signing below, Adopter acknowledges that they have read and understood this Agreement in full, including the Standard of Care in Section B and the check-in obligations in Section E, agree to be bound by every term, and affirm that all information they have provided to JWE is true and accurate. Adopter understands that any false information provided to JWE is sufficient grounds for JWE to reclaim the equine. Signed electronically below, per Section M.30. JWE's Authorized Representative countersigns separately after review.</p>
+
+                <h4>Addendum — Known Medical Conditions &amp; Special Care Needs</h4>
+                <p>Any known medical condition(s) of the equine, recommended treatment, and any special care needs are collected in the form below. By signing, Adopter acknowledges they understand the extent of any condition(s) and the recommended treatment described.</p>
+              </div>
+
+              <form name="adoption-contract" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
+                <input type="hidden" name="form-name" value="adoption-contract">
+                <p class="sr-only"><label>Don't fill this out if you're human: <input name="bot-field"></label></p>
+
+                <fieldset>
+                  <legend>A. Equine Information</legend>
+                  <div class="field"><label for="ac-horse">Which equine are you adopting? <span class="required">*</span></label><input type="text" id="ac-horse" name="Equine Name" required></div>
+                  <p class="hint">Registered name, breed, color, age, microchip/tattoo/brand number, and known medical conditions are completed by JWE on the final agreement — not something you need to fill in.</p>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Adopter Information</legend>
+                  <div class="field"><label for="ac-name">Adopter full legal name <span class="required">*</span></label><input type="text" id="ac-name" name="Full Legal Name" required></div>
+                  <div class="field-row">
+                    <div class="field"><label for="ac-email">Email <span class="required">*</span></label><input type="email" id="ac-email" name="Email" required></div>
+                    <div class="field"><label for="ac-phone">Phone <span class="required">*</span></label><input type="tel" id="ac-phone" name="Phone" required></div>
+                  </div>
+                  <div class="field"><label for="ac-mailing">Your home / mailing address <span class="required">*</span></label><input type="text" id="ac-mailing" name="Mailing Address" required></div>
+                  <div class="field">
+                    <label class="check-item" style="margin-bottom:8px;"><input type="checkbox" id="ac-same" checked> Equine will be kept at this same address</label>
+                    <div id="ac-horse-address-wrap" style="display:none;">
+                      <label for="ac-horse-address">Physical address where the equine will be kept <span class="required">*</span></label>
+                      <input type="text" id="ac-horse-address" name="Equine Address">
+                    </div>
+                  </div>
+                  <div class="field"><label for="ac-coadopter">Co-adopter full legal name (if any)</label><input type="text" id="ac-coadopter" name="Co-Adopter Legal Name"></div>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Boarding (Section A)</legend>
+                  <div class="field">
+                    <label>Where will the equine be kept? <span class="required">*</span></label>
+                    <div class="radio-row">
+                      <label class="radio-item"><input type="radio" name="Home or Boarding" value="Adopter's home" required> Adopter's home</label>
+                      <label class="radio-item"><input type="radio" name="Home or Boarding" value="Boarding facility"> An approved boarding facility</label>
+                    </div>
+                  </div>
+                  <div class="field"><label for="ac-facility">Facility name &amp; address (if boarding)</label><input type="text" id="ac-facility" name="Boarding Facility Name and Address"></div>
+                  <p class="hint">The adoption deposit, adoption fee, fee track (Clause 3), and balance due date are completed by JWE on the final agreement, based on what Candice has already discussed with you.</p>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Required Initials</legend>
+                  <div class="field-row">
+                    <div class="field"><label for="ac-init-13">Clause 13 — No Auction or Slaughter <span class="required">*</span></label><input type="text" id="ac-init-13" name="Initials - No Auction or Slaughter" maxlength="6" placeholder="Initials" required></div>
+                    <div class="field"><label for="ac-init-14">Clause 14 — No Breeding <span class="required">*</span></label><input type="text" id="ac-init-14" name="Initials - No Breeding" maxlength="6" placeholder="Initials" required></div>
+                  </div>
+                  <div class="field"><label for="ac-init-15">Clause 15 — No Prohibited Uses <span class="required">*</span></label><input type="text" id="ac-init-15" name="Initials - No Prohibited Uses" maxlength="6" placeholder="Initials" required></div>
+                  <div class="field"><label for="ac-init-addendum">Addendum — Known Medical Conditions acknowledgment <span class="required">*</span></label><input type="text" id="ac-init-addendum" name="Initials - Addendum" maxlength="6" placeholder="Initials" required></div>
+                </fieldset>
+
+                <div class="agree-box">
+                  <input type="checkbox" id="ac-agree" name="Terms Agreed" value="Yes" required>
+                  <label for="ac-agree">I have read and understood this Adoption Contract in full, including the Standard of Care (Section B) and check-in obligations (Section E), agree to be bound by every term, and affirm that all information I've provided is true and accurate. I understand that typing my name below is my electronic signature with the same legal effect as a handwritten one (Section M.30). <span class="required">*</span></label>
+                </div>
+
+                <div class="field-row">
+                  <div class="field"><label for="ac-sig">Type your full legal name as your signature <span class="required">*</span></label><input type="text" id="ac-sig" name="Digital Signature" required></div>
+                  <div class="field"><label for="ac-date">Date <span class="required">*</span></label><input type="date" id="ac-date" name="Date" required></div>
+                </div>
+                <div class="field"><label for="ac-cosig">Co-adopter signature (typed full legal name, if any)</label><input type="text" id="ac-cosig" name="Co-Adopter Digital Signature"></div>
+
+                <button type="submit" class="btn" style="background:var(--hay); color:#241A13; font-weight:600;">Submit Adoption Contract</button>
+                <p class="hint" style="margin-top:8px;">This goes to Candice for review. It's final once JWE's Authorized Representative countersigns.</p>
+                <div class="form-msg success" data-success>Received — this Adoption Contract is pending JWE's review and countersignature.</div>
+                <div class="form-msg error" data-error>Something went wrong sending this. Please try again, or email the sanctuary directly.</div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div class="rail" aria-hidden="true"></div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h5>Journey With Equus</h5>
+        <p>Liberty's Legacy Inc. — a 501(c)(3) nonprofit</p>
+        <p>Eastern Colorado</p>
+      </div>
+      <div>
+        <h5>Questions before applying?</h5>
+        <p>Reach out any time — we'd rather talk it through than have you guess.</p>
+      </div>
+    </div>
+    <div class="legal">Liberty's Legacy Inc., dba Journey With Equus · EIN 47-4878985 · Elizabeth, Colorado</div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // gate accordions
+  document.querySelectorAll('[data-gate-toggle]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var gate = btn.closest('.gate');
+      var isOpen = gate.getAttribute('data-open') === 'true';
+      gate.setAttribute('data-open', isOpen ? 'false' : 'true');
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    });
+  });
+
+  // open the right gate if arriving via a direct link / hash
+  function openGateFromHash(){
+    var hash = window.location.hash.replace('#','');
+    if(!hash) return;
+    var gate = document.getElementById(hash);
+    if(gate && gate.classList.contains('gate')){
+      gate.setAttribute('data-open','true');
+      var head = gate.querySelector('[data-gate-toggle]');
+      if(head) head.setAttribute('aria-expanded','true');
+    }
+  }
+  window.addEventListener('hashchange', openGateFromHash);
+  openGateFromHash();
+
+  // ---- Simple access gate for contract sections ----
+  // This is a soft speed-bump, NOT real security — anyone who views the
+  // page source can find these values. Fine for keeping casual visitors
+  // out of a short intake form; change the passwords any time by editing
+  // the two values below.
+  var CONTRACT_PASSWORDS = {
+    foster: "fosterhorse",
+    adopt: "adopthorse"
+  };
+
+  document.querySelectorAll('[data-pw-submit]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var key = btn.getAttribute('data-pw-submit');
+      var gateEl = document.querySelector('[data-pw-gate="'+key+'"]');
+      var contentEl = document.querySelector('[data-pw-content="'+key+'"]');
+      var errorEl = document.querySelector('[data-pw-error="'+key+'"]');
+      var input = gateEl.querySelector('input[type=password]');
+      if(input.value === CONTRACT_PASSWORDS[key]){
+        gateEl.style.display = 'none';
+        contentEl.style.display = 'block';
+        if(errorEl) errorEl.style.display = 'none';
+      } else if(errorEl){
+        errorEl.style.display = 'block';
+      }
+    });
+  });
+  document.querySelectorAll('[data-pw-gate] input[type=password]').forEach(function(input){
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        var key = input.closest('[data-pw-gate]').getAttribute('data-pw-gate');
+        document.querySelector('[data-pw-submit="'+key+'"]').click();
+      }
+    });
+  });
+
+  // "same address" toggle for contract intake forms
+  function wireSameAddressToggle(checkboxId, wrapId, inputId){
+    var cb = document.getElementById(checkboxId);
+    var wrap = document.getElementById(wrapId);
+    var input = document.getElementById(inputId);
+    if(!cb || !wrap) return;
+    function sync(){
+      if(cb.checked){ wrap.style.display = 'none'; if(input) input.removeAttribute('required'); }
+      else { wrap.style.display = 'block'; if(input) input.setAttribute('required','required'); }
+    }
+    cb.addEventListener('change', sync);
+    sync();
+  }
+  wireSameAddressToggle('fc-same','fc-horse-address-wrap','fc-horse-address');
+  wireSameAddressToggle('ac-same','ac-horse-address-wrap','ac-horse-address');
+
+  // Netlify AJAX form submission
+  function encodeFormData(data){
+    var parts = [];
+    Object.keys(data).forEach(function(key){
+      var val = data[key];
+      if(Array.isArray(val)){
+        val.forEach(function(v){ parts.push(encodeURIComponent(key) + "=" + encodeURIComponent(v)); });
+      } else {
+        parts.push(encodeURIComponent(key) + "=" + encodeURIComponent(val));
+      }
+    });
+    return parts.join("&");
+  }
+
+  document.querySelectorAll('[data-netlify-form]').forEach(function(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var formData = new FormData(form);
+      var data = {};
+      formData.forEach(function(value, key){
+        if(data.hasOwnProperty(key)){
+          data[key] = Array.isArray(data[key]) ? data[key].concat(value) : [data[key], value];
+        } else {
+          data[key] = value;
+        }
+      });
+
+      var submitBtn = form.querySelector('button[type=submit]');
+      var successMsg = form.querySelector('[data-success]');
+      var errorMsg = form.querySelector('[data-error]');
+      if(errorMsg) errorMsg.style.display = 'none';
+      if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeFormData(data)
+      })
+      .then(function(){
+        form.reset();
+        if(successMsg) successMsg.style.display = 'block';
+        if(submitBtn){ submitBtn.style.display = 'none'; }
+      })
+      .catch(function(){
+        if(errorMsg) errorMsg.style.display = 'block';
+        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'Try Again'; }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
