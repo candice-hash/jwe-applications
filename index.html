@@ -670,6 +670,29 @@
                   <div class="field"><label for="faa-turnout">Describe the turnout at this facility — is it a large paddock or pasture with herd companionship, or a box stall? <span class="required">*</span></label><textarea id="faa-turnout" name="Boarding Turnout Description"></textarea></div>
                 </div>
                 <div class="field"><label for="faa-acres">How many acres does your farm have where the horse will be kept? What type of fencing? <span class="required">*</span></label><input type="text" id="faa-acres" name="Acreage and Fencing" required></div>
+                <div class="field"><label for="faa-turnout-hours">How many hours per day will the horse be turned out? <span class="required">*</span></label><input type="text" id="faa-turnout-hours" name="Daily Turnout Hours" placeholder="e.g. all day / 10+ hours" required></div>
+                <div class="field">
+                  <label>Will the horse ever live in a box stall? <span class="required">*</span></label>
+                  <div class="radio-row">
+                    <label class="radio-item"><input type="radio" name="Box Stall Use" value="No — always turned out" required> No — always turned out</label>
+                    <label class="radio-item"><input type="radio" name="Box Stall Use" value="Only overnight, 8+ hours turnout daily"> Only stalled overnight, 8+ hours turnout daily</label>
+                    <label class="radio-item"><input type="radio" name="Box Stall Use" value="Yes, stalled much of the day"> Yes, stalled much of the day</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Is there a run-in or three-sided shelter available? <span class="required">*</span></label>
+                  <div class="radio-row">
+                    <label class="radio-item"><input type="radio" name="Shelter Available" value="Yes" required> Yes</label>
+                    <label class="radio-item"><input type="radio" name="Shelter Available" value="No"> No</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Will the horse have equine (or suitable) companionship? <span class="required">*</span></label>
+                  <div class="radio-row">
+                    <label class="radio-item"><input type="radio" name="Companionship" value="Yes" required> Yes</label>
+                    <label class="radio-item"><input type="radio" name="Companionship" value="No"> No</label>
+                  </div>
+                </div>
                 <div class="field"><label for="faa-family">Number of people in the family? Please list the number and ages of children (if any). <span class="required">*</span></label><textarea id="faa-family" name="Family and Children" required></textarea></div>
                 <div class="field"><label for="faa-other-horses">Do you have other horses? <span class="required">*</span></label><input type="text" id="faa-other-horses" name="Other Horses" required></div>
               </fieldset>
@@ -740,6 +763,27 @@
               </fieldset>
 
               <div class="field"><label for="faa-anything-else">Is there anything else you want us to know? <span class="required">*</span></label><textarea id="faa-anything-else" name="Anything Else" required></textarea></div>
+
+              <div class="agree-box">
+                <input type="checkbox" id="faa-homevisit" name="Home Visit and Check-In Consent" value="Yes" required>
+                <label for="faa-homevisit">I consent to a property visit by a Journey With Equus representative before placement, and to periodic check-ins afterward. <span class="required">*</span></label>
+              </div>
+              <div class="agree-box">
+                <input type="checkbox" id="faa-checkins" name="Photo Update Consent" value="Yes" required>
+                <label for="faa-checkins">I agree to provide photo updates at 24 hours, 72 hours, 30 days, and then every 90 days while the horse is in my care. <span class="required">*</span></label>
+              </div>
+              <div class="agree-box">
+                <input type="checkbox" id="faa-vetclear" name="Vet Clearance Acknowledged" value="Yes" required>
+                <label for="faa-vetclear">I understand there is no guarantee the horse is rideable, and that a licensed vet must clear the horse's soundness (legs &amp; back) before it is ridden. <span class="required">*</span></label>
+              </div>
+              <div class="agree-box">
+                <input type="checkbox" id="faa-return" name="Return Policy Acknowledged" value="Yes" required>
+                <label for="faa-return">I understand that if I can no longer keep this horse, it must be returned to Journey With Equus — it may never be sold, given away, or sent to auction. <span class="required">*</span></label>
+              </div>
+              <div class="agree-box">
+                <input type="checkbox" id="faa-sign" name="Agree to Sign Agreement" value="Yes" required>
+                <label for="faa-sign">I am willing to sign the applicable Journey With Equus agreement (Foster or Adoption), including its care, euthanasia-approval, and reclamation terms. <span class="required">*</span></label>
+              </div>
 
               <div class="agree-box">
                 <label for="faa-certify" style="margin-bottom:8px; display:block;">Typing your name below certifies that all information provided is correct and true. <span class="required">*</span></label>
